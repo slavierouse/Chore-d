@@ -71,6 +71,7 @@ io.on('connection', function(socket){
     socket.on('submitChoreComplete',function(completeReceiveData){
       chores[completeReceiveData.chore.id].status = 'completed';
       chores[completeReceiveData.chore.id].timeCompleted = new Date();
+      chores[completeReceiveData.chore.id].picture = completeReceiveData.picture;
       var completeSendData = {
         choreID: {id: completeReceiveData.chore.id},
         choreName: chores[completeReceiveData.chore.id].name,
