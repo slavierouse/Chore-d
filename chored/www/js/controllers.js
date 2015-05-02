@@ -32,17 +32,55 @@ angular.module('starter.controllers', [])
     }, 1000);
   };
 })
-
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
+.service("Chores",function($http){
+  this.chores = [];
+  $.merge(this.chores, [
+    {
+      id: 1,
+      name: "dust",
+      assigned: false,
+      added: false
+    },
+    {
+      id: 2,
+      name: "dishes",
+      assigned: false,
+      added: true
+    },
+    {
+      id: 3,
+      name: "read techcrunch",
+      assigned: false,
+      added: false
+    },
+    {
+      id: 4,
+      name: "dust",
+      assigned: false,
+      added: false
+    },
+    {
+      id: 5,
+      name: "dishes",
+      assigned: false,
+      added: true
+    },
+    {
+      id: 6,
+      name: "read techcrunch",
+      assigned: false,
+      added: false
+    }
+  ]);
+  return this.chores;
 })
+.controller('ChoreSelectionCtrl', function($scope, Chores) {
+  $scope.chores = Chores;
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
+  $scope.updateAddedStatus = function($event, chore){
+
+  }
+})
+.controller('ChoreWheelCtrl', function($scope, Chores){
+  $scope.chores = Chores;
 });

@@ -24,9 +24,8 @@ angular.module('chored', ['ionic', 'starter.controllers'])
   $stateProvider
    .state('signIn', {
     url: "/sign-in",
-    abstract: true,
     templateUrl: "templates/sign-in.html",
-    controller: 'AppCtrl'
+    
   })
   .state('home', {
     url: "/home",
@@ -43,12 +42,21 @@ angular.module('chored', ['ionic', 'starter.controllers'])
       }
     }
   })
-
+  .state('home.selectChores', {
+    url: "/select-chores",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/select-chores.html",
+        controller: "ChoreSelectionCtrl"
+      }
+    }
+  })
   .state('home.wheel', {
     url: "/wheel",
     views: {
       'menuContent': {
-        templateUrl: "templates/wheel.html"
+        templateUrl: "templates/wheel.html",
+        controller: "ChoreWheelCtrl"
       }
     }
   });
