@@ -6,6 +6,20 @@
   socket.on("chores",function(d){
   	console.log(d)
   })
+
+  socket.emit('signin',{email: "shaheen.lavie.rouse@gmail.com", name: "Shaheen"});
+  socket.emit('choreUnselect',{id: 3});
+  socket.emit('choreUnselect',{id: 4});
+  socket.emit('choreSelect',{id: 4});
+  socket.emit('choreAssign',{id: 1});
+  socket.emit('submitChoreComplete',{
+    chore: {id: 1},
+    picture: 'abc'
+  });
+  socket.on('notifyChoreComplete', function(completeSendData){
+    console.log(completeSendData);
+  })
+
 </script>
 </head>
 
