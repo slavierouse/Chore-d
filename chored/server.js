@@ -118,33 +118,7 @@ io.on('connection', function(socket){
     console.log(choreLog);
 
   })
-    //socket.on('')
 
-
-
-
-
-
-
-  /*socket.on('choreConfirm',function(data){
-
-    if(data.done){
-      //log as complete
-      //send a
-    } else {
-      //send the user who did it a rejection notification
-        io.sockets.emit('fraudulent',data)
-      //log as fraudulent
-    }
-  })
-
-
-	socket.on('image',function(img){
-    	io.sockets.emit('image',img);
-    });
-    socket.on('message',function(data){
-    	io.sockets.emit('message',data);
-    });*/
 });
 
 
