@@ -1,6 +1,20 @@
 var app = require('./app');
 var chores = require('./initiation/chores');
 
+function clone(obj) {
+    if(obj === null || typeof(obj) !== 'object')
+        return obj;
+
+    var temp = obj.constructor(); // changed
+
+    for(var key in obj) {
+        if(Object.prototype.hasOwnProperty.call(obj, key)) {
+            temp[key] = clone(obj[key]);
+        }
+    }
+    return temp;
+}
+
 app.get('/chores',function(request,response) {
   response.send(JSON.stringify(chores));
 });
@@ -44,44 +58,66 @@ server.listen(3000);
 console.log('server listening on port 3000');
 
 console.log(chores);
+var choreLog = [];
 io.on('connection', function(socket){
 
-    socket.on('signin',function(info){
-      socket.email = info.email;
-      socket.userName = info.name;
-    })
+  socket.on('signin',function(info){
+    socket.email = info.email;
+    socket.userName = info.name;
+  })
 
-    socket.on('choreSelect', function(chore){
-      chores[chore.id].selected = true;
-      console.log(chores);
-    });
+  socket.on('choreSelect', function(chore){
+    chores[chore.id].selected = true;
+    console.log(chores);
+  });
 
-    socket.on('choreUnselect', function(chore){
-      chores[chore.id].selected = false;
-      console.log(chores);
-    });
+  socket.on('choreUnselect', function(chore){
+    chores[chore.id].selected = false;
+    console.log(chores);
+  });
 
-    socket.on('choreAssign',function(chore){
-      chores[chore.id].assignee = socket.email;
-      chores[chore.id].timeAssigned = new Date();
-      chores[chore.id].status = 'assigned';
-      console.log(chores);
-    });
+  socket.on('choreAssign',function(chore){
+    chores[chore.id].assignee = socket.email;
+    chores[chore.id].timeAssigned = new Date();
+    chores[chore.id].status = 'assigned';
+    console.log(chores);
+  });
 
-    socket.on('submitChoreComplete',function(completeReceiveData){
-      chores[completeReceiveData.chore.id].status = 'completed';
-      chores[completeReceiveData.chore.id].timeCompleted = new Date();
-      chores[completeReceiveData.chore.id].picture = completeReceiveData.picture;
-      var completeSendData = {
-        choreID: {id: completeReceiveData.chore.id},
-        choreName: chores[completeReceiveData.chore.id].name,
-        senderId: socket.email,
-        senderName: socket.userName
-      }
-      io.sockets.emit('notifyChoreComplete',completeSendData);
-      console.log(chores);
-    });
+  socket.on('submitChoreComplete',function(completeReceiveData){
+    chores[completeReceiveData.chore.id].status = 'completed';
+    chores[completeReceiveData.chore.id].timeCompleted = new Date();
+    chores[completeReceiveData.chore.id].picture = completeReceiveData.picture;
+    var completeSendData = {
+      choreID: {id: completeReceiveData.chore.id},
+      choreName: chores[completeReceiveData.chore.id].name,
+      senderId: socket.email,
+      senderName: socket.userName
+    }
+    io.sockets.emit('notifyChoreComplete',completeSendData);
+    console.log(chores);
+  });
 
+  socket.on('confirmChoreComplete',function(confirmReceiveData){
+    var thisChore = clone(chores[confirmReceiveData.chore.id]);
+    thisChore.timeConfirmed = new Date();
+    thisChore.confirmed = confirmReceiveData.done;
+    choreLog.push(thisChore);
+
+    console.log(confirmReceiveData);
+
+    if (confirmReceiveData.done == true) {
+      chores[confirmReceiveData.chore.id].status = 'unassigned';
+      chores[confirmReceiveData.chore.id].timeAssigned= null;
+      chores[confirmReceiveData.chore.id].timeCompleted= null;
+      chores[confirmReceiveData.chore.id].selected= true;
+      chores[confirmReceiveData.chore.id].assignee= null;
+      chores[confirmReceiveData.chore.id].picture= null;
+    }
+
+    console.log(chores);
+    console.log(choreLog);
+
+  })
     //socket.on('')
 
 

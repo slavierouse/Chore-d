@@ -18,6 +18,18 @@
   });
   socket.on('notifyChoreComplete', function(completeSendData){
     console.log(completeSendData);
+  });
+
+  //How to reject a confirmation request
+  socket.emit('confirmChoreComplete',{
+    chore: {id: 1},
+    done: false
+  })
+
+  //How to accept a confirmation request
+  socket.emit('confirmChoreComplete',{
+    chore: {id: 1},
+    done: true
   })
 
 </script>
