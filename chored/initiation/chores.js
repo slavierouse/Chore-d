@@ -20,7 +20,8 @@ for(var i = 0; i<choreList.length; i++){
     timeAssigned: null,
     timeCompleted: null,
     selected: true,
-    assignee: null
+    assignee: null,
+    picture: null
   };
 }
 

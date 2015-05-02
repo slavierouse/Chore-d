@@ -48,6 +48,7 @@ io.on('connection', function(socket){
 
     socket.on('signin',function(info){
       socket.email = info.email;
+      socket.userName = info.name;
     })
 
     socket.on('choreSelect', function(chore){
@@ -67,15 +68,18 @@ io.on('connection', function(socket){
       console.log(chores);
     });
 
-    /*socket.on('choreComplete',function(completeReceiveData){
+    socket.on('submitChoreComplete',function(completeReceiveData){
       chores[completeReceiveData.chore.id].status = 'completed';
+      chores[completeReceiveData.chore.id].timeCompleted = new Date();
       var completeSendData = {
-        chore: {id: completeReceiveData.chore.id},
-        name: chores[completeReceiveData.chore.id].name,
-        senderId: socket.id
+        choreID: {id: completeReceiveData.chore.id},
+        choreName: chores[completeReceiveData.chore.id].name,
+        senderId: socket.email,
+        senderName: socket.userName
       }
-      io.sockets.emit('choreComplete')
-    });*/
+      io.sockets.emit('notifyChoreComplete',completeSendData);
+      console.log(chores);
+    });
 
     //socket.on('')
 
