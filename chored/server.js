@@ -1,58 +1,9 @@
 var app = require('./app');
-var io = require('socket.io')(server);
 var chores = require('./initiation/chores');
-
-
-io.on('connection', function(socket){
-
-  //chore assign
-    //change chores array
-    /*socket.on('choreAssign',function(chore){
-      chores[chore.id].assignee = socket.id;
-      chores[chore.id].timeAssigned = new Date();
-      chores[chore.id].status = 'assigned';
-
-
-    })*/
-
-
-
-
-
-
-
-
-  /*socket.on('choreConfirm',function(data){
-
-    if(data.done){
-      //log as complete
-      //send a
-    } else {
-      //send the user who did it a rejection notification
-        io.sockets.emit('fraudulent',data)
-      //log as fraudulent
-    }
-  })
-
-
-	socket.on('image',function(img){
-    	io.sockets.emit('image',img);
-    });
-    socket.on('message',function(data){
-    	io.sockets.emit('message',data);
-    });*/
-});
-
-
 
 app.get('/chores',function(request,response) {
   response.send(JSON.stringify(chores));
 });
-
-
-
-
-
 
 
 // catch 404 and forward to error handler
@@ -87,5 +38,72 @@ app.use(function(err, req, res, next) {
 });
 
 var server = require('http').createServer(app);
+var io = require('socket.io')(server);
 server.listen(3000);
+
 console.log('server listening on port 3000');
+
+console.log(chores);
+io.on('connection', function(socket){
+
+    socket.on('signin',function(info){
+      socket.email = info.email;
+    })
+
+    socket.on('choreSelect', function(chore){
+      chores[chore.id].selected = true;
+      console.log(chores);
+    });
+
+    socket.on('choreUnselect', function(chore){
+      chores[chore.id].selected = false;
+      console.log(chores);
+    });
+
+    socket.on('choreAssign',function(chore){
+      chores[chore.id].assignee = socket.email;
+      chores[chore.id].timeAssigned = new Date();
+      chores[chore.id].status = 'assigned';
+      console.log(chores);
+    });
+
+    /*socket.on('choreComplete',function(completeReceiveData){
+      chores[completeReceiveData.chore.id].status = 'completed';
+      var completeSendData = {
+        chore: {id: completeReceiveData.chore.id},
+        name: chores[completeReceiveData.chore.id].name,
+        senderId: socket.id
+      }
+      io.sockets.emit('choreComplete')
+    });*/
+
+    //socket.on('')
+
+
+
+
+
+
+
+  /*socket.on('choreConfirm',function(data){
+
+    if(data.done){
+      //log as complete
+      //send a
+    } else {
+      //send the user who did it a rejection notification
+        io.sockets.emit('fraudulent',data)
+      //log as fraudulent
+    }
+  })
+
+
+	socket.on('image',function(img){
+    	io.sockets.emit('image',img);
+    });
+    socket.on('message',function(data){
+    	io.sockets.emit('message',data);
+    });*/
+});
+
+

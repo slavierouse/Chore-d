@@ -6,6 +6,9 @@
   socket.on("chores",function(d){
   	console.log(d)
   })
+
+  socket.emit('signin',{email: "shaheen.lavie.rouse@gmail.com"});
+  socket.emit('choreAssign',{id: 1});
 </script>
 </head>
 
