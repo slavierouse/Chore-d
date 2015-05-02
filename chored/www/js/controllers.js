@@ -32,9 +32,26 @@ angular.module('starter.controllers', [])
     }, 1000);
   };
 })
-.service("Chores",function($http){
+.constant("ENV","prod")
+.service("envPrefix",["ENV",function(ENV){//https://bunny.qa.mequilibrium.com/,
+  var prefix;
+  switch(ENV){
+    case "prod":
+      prefix = "http://209.208.27.193/";
+      break;
+    default:
+      prefix = "http://209.208.27.193/";
+  }
+  this.prefixUrl=function(url){
+    return prefix+url;
+  }
+}])
+.service("Chores",function($http, envPrefix){
   this.chores = [];
-  $.merge(this.chores, [
+  $http.get(envPrefix.prefixUrl("chores")).success(function(chores){
+    $.merge(this.chores,chores);
+  });
+  /*$.merge(this.chores, [
     {
       id: 1,
       name: "dust",
@@ -71,7 +88,7 @@ angular.module('starter.controllers', [])
       assigned: false,
       added: false
     }
-  ]);
+  ]);*/
   return this.chores;
 })
 .controller('ChoreSelectionCtrl', function($scope, Chores) {
