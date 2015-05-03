@@ -7675,6 +7675,9 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+.padding {
+  padding: 16px; }
+
 .wheel, .umbrella, .color {
   content: "";
   position: absolute;
@@ -7751,7 +7754,7 @@ a.button {
 .spin-center {
   -webkit-transition: all 5000ms cubic-bezier(0.645, 0.045, 0.355, 1);
   transition: all 5000ms cubic-bezier(0.645, 0.045, 0.355, 1);
-  -webkit-transform: rotateZ(45deg);
+  -webkit-transform: rotateZ(15deg);
   width: 100px;
   height: 100px;
   border-radius: 50%;

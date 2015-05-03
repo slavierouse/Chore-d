@@ -1,20 +1,38 @@
 <ion-view view-title="Chore'd">
 	<ion-content>
-		<div class="row">
-			<div class="wheel">
-			  <ul class="umbrella">
-			    <li class="color" ng-repeat="chore in chores track by chore.id"></li>
-			  </ul>
-			  <div class="wheel-spinner"><p>SPIN</p><div class="spin-center"></div></div>
-			</div>
-		</div>
-		<div class="row">
-			<ul class="col col-50">
-				<li ng-repeat="chore in chores.slice(0,Math.floor(chores.length/2)) track by chore.id">{{chore.name}}</li>
-			</ul>
-			<ul class="col col-50">
-				<li ng-repeat="chore in chores.slice(Math.floor(chores.length/2)) track by chore.id">{{chore.name}}</li>
-			</ul>
-		</div>
+		<ion-slide-box show-pager="false" delegate-handle="wheel-assignments" active-slide="slideNum">
+        	<ion-slide>
+				<div class="row">
+					<div class="wheel">
+					  <ul class="umbrella">
+					    <li class="color" ng-repeat="chore in chores track by chore.id"></li>
+					  </ul>
+					  <div class="wheel-spinner" ng-click="spin()"><p>SPIN</p><div class="spin-center"></div></div>
+					</div>
+				</div>
+				<div class="row">
+					<ul class="col col-50">
+						<li ng-repeat="chore in chores.slice(0,Math.floor(chores.length/2)) track by chore.id">{{chore.name}}</li>
+					</ul>
+					<ul class="col col-50">
+						<li ng-repeat="chore in chores.slice(Math.floor(chores.length/2)) track by chore.id">{{chore.name}}</li>
+					</ul>
+				</div>
+			</ion-slide>
+			<ion-slide>
+				<div class="padding">
+					<h3>Chore Assigned To You</h3>
+					<div class="box">
+						<div class="box-header">
+							<h4>Due Date: {{selectedChore.dueDate}}</h4>
+						</div>
+						<div class="box-body">
+							<h5>{{selectedChore.name}}</h5>
+							<p>{{selectedChore.description}}</p>
+						</div>
+					</div>
+				</div>
+			</ion-slide>
+		</ion-slide-box>
 	</ion-content>
 </ion-view>
