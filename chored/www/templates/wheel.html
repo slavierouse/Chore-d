@@ -1,4 +1,4 @@
-<ion-view view-title="Chore'd" cache-view="false">
+<ion-view view-title="Chore'd" cache-view="false" class="wheel-view">
 	<ion-content>
 		<ion-slide-box show-pager="false" delegate-handle="wheel-assignments" active-slide="slideNum">
         	<ion-slide>
@@ -29,9 +29,13 @@
 						<div class="box-body">
 							<h5>{{selectedChore.name}}</h5>
 							<p>{{selectedChore.description}}</p>
-							<a class="button" ng-click="completeChore()">COMPLETE</a>
+
 						</div>
 					</div>
+				</div>
+				<div class="bar bar-footer bar-stable">
+					<a class="button" ng-click="completeChore()" ng-if="!selectedChore.timeCompleted">COMPLETE</a>
+					<p ng-if="selectedChore.timeCompleted">Completed, awaiting roommate approval</p>
 				</div>
 			</ion-slide>
 		</ion-slide-box>

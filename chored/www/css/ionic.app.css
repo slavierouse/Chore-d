@@ -7678,6 +7678,19 @@ a.button {
 .padding {
   padding: 16px; }
 
+.scroll-content {
+  background: -webkit-linear-gradient(#3fffa6, #b0dcff);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#3fffa6, #b0dcff);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#3fffa6, #b0dcff);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#3fffa6, #b0dcff);
+  /* Standard syntax (must be last) */ }
+
+ion-side-menu .scroll-content {
+  background: #FFF; }
+
 .wheel, .umbrella, .color {
   content: "";
   position: absolute;
@@ -7769,8 +7782,38 @@ a.button {
     border: 5px solid transparent;
     border-bottom: 40px solid black; }
 
-.living-room .scroll {
+.living-room .scroll, .wheel-view .scroll {
   height: 100%; }
-  .living-room .scroll > * {
+  .living-room .scroll > *, .wheel-view .scroll > * {
     height: 100%; }
+
+.wheel-view .bar-stable {
+  background-color: #000;
+  color: #FFF;
+  text-align: center; }
+  .wheel-view .bar-stable > p {
+    width: 100%;
+    margin: 10px 0;
+    line-height: 1;
+    font-size: 16px; }
+
+.wheel-view h3 {
+  color: #FFF;
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 20px; }
+.wheel-view h4 {
+  text-align: center;
+  font-size: 16px;
+  font-weight: normal; }
+.wheel-view h5 {
+  text-align: center;
+  font-size: 20px; }
+.wheel-view .box {
+  background-color: #FFFF5C;
+  padding: 16px; }
+.wheel-view .box-header {
+  background-color: #FFED8D;
+  margin: -16px -16px 0 -16px;
+  padding: 8px 16px; }
 
