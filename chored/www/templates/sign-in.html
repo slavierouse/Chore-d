@@ -3,13 +3,12 @@
 	<div class="centering-block padding">
 		<div class="centered">
 			<img src="images/logo-alternate.png" class="logo">
+			<input type="text" name="name" placeholder="Your name" ng-model="login.name" required>
 			<input type="email" name="email" placeholder="Your email" ng-model="login.email" required>
-			<input type="password" name="password" placeholder="Password" ng-model="login.email" required>
+			<input type="password" name="password" placeholder="Password" ng-model="login.password" required>
+			<input type="text" name="email" placeholder="Apartment Address" ng-model="login.address" required>
 			<span class="error" ng-show="err">{{err}}</span>
 			<input type="submit" value="Next" class="sign-up-btn">
-			<div class="sign-up-links">
-				<!-- <a href="#">Sign up!</a><span>|</span> --><a ui-sref="forgot-pw" class="u orange-txt">Forgot your password?</a>
-			</div>
 		</div>
 	</div>
 </form>

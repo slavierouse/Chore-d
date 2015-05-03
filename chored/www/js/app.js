@@ -52,14 +52,11 @@ angular.module('chored', ['ionic', 'starter.controllers'])
       }
     }
   })
-  .state('home.selectChores', {
+  .state('selectChores', {
     url: "/select-chores",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/select-chores.html",
-        controller: "ChoreSelectionCtrl"
-      }
-    }
+    templateUrl: "templates/select-chores.html",
+    controller: "ChoreSelectionCtrl"
+    
   })
   .state('home.wheel', {
     url: "/wheel",
