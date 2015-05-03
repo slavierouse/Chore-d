@@ -32,17 +32,67 @@ angular.module('starter.controllers', [])
     }, 1000);
   };
 })
-
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
+.constant("ENV","prod")
+.service("envPrefix",["ENV",function(ENV){//https://bunny.qa.mequilibrium.com/,
+  var prefix;
+  switch(ENV){
+    case "prod":
+      prefix = "http://209.208.27.193/";
+      break;
+    default:
+      prefix = "http://209.208.27.193/";
+  }
+  this.prefixUrl=function(url){
+    return prefix+url;
+  }
+}])
+.service("Chores",function($http, envPrefix){
+  this.chores = [];
+  $http.get(envPrefix.prefixUrl("chores")).success(function(chores){
+    $.merge(this.chores,chores);
+  });
+  /*$.merge(this.chores, [
+    {
+      id: 1,
+      name: "dust",
+      assigned: false,
+      added: false
+    },
+    {
+      id: 2,
+      name: "dishes",
+      assigned: false,
+      added: true
+    },
+    {
+      id: 3,
+      name: "read techcrunch",
+      assigned: false,
+      added: false
+    },
+    {
+      id: 4,
+      name: "dust",
+      assigned: false,
+      added: false
+    },
+    {
+      id: 5,
+      name: "dishes",
+      assigned: false,
+      added: true
+    },
+    {
+      id: 6,
+      name: "read techcrunch",
+      assigned: false,
+      added: false
+    }
+  ]);*/
+  return this.chores;
 })
+.controller('ChoreSelectionCtrl', function($scope, Chores) {
+  $scope.chores = Chores;
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
@@ -60,3 +110,9 @@ angular.module('starter.controllers', [])
     { title: 'Torey', id: 5, points: 89 },
     { title: 'Cowbell', id: 6, points: 0 }];
 });
+
+  $scope.updateAddedStatus = function($event, chore){
+
+  }
+})
+

@@ -1,0 +1,27 @@
+<ion-view view-title="Select Chores">
+	<ion-content>
+		<ion-list>
+			<ion-item ng-repeat="chore in chores track by chore.id"><!--  ng-click="updateCompletionStatus($event, activity)" --> <!-- ng-click="showActivityInfo($event,activity)" -->
+				<div class="row">
+					<div class="col col-80 col-center">
+						<p>{{chore.name}}</p>
+						<!-- <div>
+							<span class="mr20 meq-icon info-icon  big-icon"ng-click="showActivityInfo($event,activity,0)"></span>
+							<span class="meq-icon calendar-icon big-icon" ng-click="showActivityInfo($event,activity,2)"></span>
+						</div> -->
+					</div>
+					<div class="col col-20 col-center text-right" >
+							<label class="checkbox checkbox-royal" ng-click="updateAddedStatus($event, chore)">
+						       <input type="checkbox" ng-checked="chore.added">
+						     </label>
+						<!-- <span class="green-txt meq-icon checkmark-icon" ng-if="activity.completed_today"></span>
+						<span class="grey-txt meq-icon checkmark-icon" ng-if="!activity.completed_today"></span> -->
+					</div>
+				</div>
+		    </ion-item>
+			<ion-item class="no-border item-btn">
+		    	<a ui-sref="home.wheel" class="button w100 light-blue-btn">Next</a>
+		    </ion-item>
+		</ion-list>
+	</ion-content>
+</ion-view>
