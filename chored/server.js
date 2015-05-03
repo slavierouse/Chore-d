@@ -1,5 +1,11 @@
 var app = require('./app');
 var chores = require('./initiation/chores');
+//var nexmo = require('easynexmo');
+//nexmo.initialize('0fa380ab','1d06fbc9','http');
+//nexmo.sendTextMessage('16178521199','16178521199','hi');
+
+var http = require('http');
+
 var messageLog = [];
 
 function clone(obj) {
@@ -62,30 +68,41 @@ server.listen(3000);
 
 console.log('server listening on port 3000');
 
-console.log(chores);
 var choreLog = [];
 io.on('connection', function(socket){
 
   socket.on('signin',function(info){
+    console.log('sign in');
     socket.email = info.email;
     socket.userName = info.name;
+    socket.phoneNumber = info.phone;
+    console.log(socket.email);
   })
 
   socket.on('choreSelect', function(chore){
     chores[chore.id].selected = true;
-    console.log(chores);
   });
 
   socket.on('choreUnselect', function(chore){
     chores[chore.id].selected = false;
-    console.log(chores);
   });
 
   socket.on('choreAssign',function(chore){
     chores[chore.id].assignee = socket.email;
     chores[chore.id].timeAssigned = new Date();
     chores[chore.id].status = 'assigned';
-    console.log(chores);
+    io.sockets.sockets.forEach(function(allSocket){
+      console.log("A: " + chores[chore.id].assignee);
+      if (allSocket.email == chores[chore.id].assignee) {
+        return false;
+      };
+      console.log('B: '+ allSocket.phoneNumber);
+      var httpUri = 'http://rest.nexmo.com/sms/json?api_key=0fa380ab&api_secret=1d06fbc9&from=12532715644&to=';
+      httpUri += allSocket.phoneNumber +'&text=';
+      httpUri += socket.userName+" will do the " + chores[chore.id].name;
+      httpUri += " this week."
+      http.get(httpUri);
+    })
   });
 
   socket.on('submitChoreComplete',function(completeReceiveData){
@@ -99,7 +116,6 @@ io.on('connection', function(socket){
       senderName: socket.userName
     }
     io.sockets.emit('notifyChoreComplete',completeSendData);
-    console.log(chores);
   });
 
   socket.on('confirmChoreComplete',function(confirmReceiveData){
@@ -118,10 +134,6 @@ io.on('connection', function(socket){
       chores[confirmReceiveData.chore.id].assignee= null;
       chores[confirmReceiveData.chore.id].picture= null;
     }
-
-    console.log(chores);
-    console.log(choreLog);
-
   });
 
   socket.on('message',function(messageContent){

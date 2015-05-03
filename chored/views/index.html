@@ -4,23 +4,32 @@
   <script src="/socket.io/socket.io.js"></script>
   <script src="http://js.arcgis.com/3.13/"></script>
   <script>
+  $(document).ready(function(){
+
     var socket = io();
     socket.on("chores",function(d){
      console.log(d)
    })
 
-    socket.emit('signin',{email: "shaheen.lavie.rouse@gmail.com", name: "Shaheen"});
-    socket.emit('choreUnselect',{id: 3});
-    socket.emit('choreUnselect',{id: 4});
-    socket.emit('choreSelect',{id: 4});
-    socket.emit('choreAssign',{id: 1});
-    socket.emit('submitChoreComplete',{
-      chore: {id: 1},
-      picture: 'abc'
-    });
-    socket.on('notifyChoreComplete', function(completeSendData){
-      console.log(completeSendData);
-    });
+    $('#rightHere').on('click',function(){
+      console.log('clicked');
+      socket.emit('signin',{
+        email: $('#email').val(),
+        name: $('#name').val(),
+        phone: $('#phone').val()
+      });
+
+      socket.emit('choreUnselect',{id: 3});
+      socket.emit('choreUnselect',{id: 4});
+      socket.emit('choreSelect',{id: 4});
+      socket.emit('choreAssign',{id: $('#chore').val()});
+      socket.emit('submitChoreComplete',{
+        chore: {id: 1},
+        picture: 'abc'
+      });
+      socket.on('notifyChoreComplete', function(completeSendData){
+        console.log(completeSendData);
+      });
 
   //How to reject a confirmation request
   socket.emit('confirmChoreComplete',{
@@ -42,21 +51,36 @@
 
   socket.on('newMessage',function(data){
     console.log(data);
-  })
-
-
-  var address = '';
-  navigator.geolocation.getCurrentPosition(function(position){
-    $.get('http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?location=' + Math.round(position.coords.longitude*1000000)/1000000 + ',' +Math.round(position.coords.latitude*1000000)/1000000 +'&f=json&distance=500', function(reply){
-      address = JSON.parse(reply).address.Address;
-      console.log(address);
-    })
   });
 
-</script>
+
+});
+
+
+
+
+    var address = '';
+    navigator.geolocation.getCurrentPosition(function(position){
+      $.get('http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?location=' + Math.round(position.coords.longitude*1000000)/1000000 + ',' +Math.round(position.coords.latitude*1000000)/1000000 +'&f=json&distance=500', function(reply){
+        address = JSON.parse(reply).address.Address;
+        console.log(address);
+      })
+    });
+});
+
+  </script>
 </head>
 
 <body>
   hi
+  <h1>Phone</h1>
+  <input id='phone' type='number'\>
+  <h1>Email</h1>
+  <input id='email' type='email'\>
+  <h1>Name</h1>
+  <input id='name' type='text'\>
+  <h1>Chore</h1>
+  <input id='chore' type='number'\>
+  <button id='rightHere'>Click</button>
 </body>
 </html>
