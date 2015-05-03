@@ -241,7 +241,7 @@ return this;
   $scope.login = {};
   $scope.login.address ='';
   //var $scope.login.address = '';
-  
+
 navigator.geolocation.getCurrentPosition(function(position){
       $http.get('http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?location=' + Math.round(position.coords.longitude*1000000)/1000000 + ',' +Math.round(position.coords.latitude*1000000)/1000000 +'&f=json&distance=500').success(function(reply){
         $scope.login.address = reply.address.Address;
@@ -259,7 +259,7 @@ navigator.geolocation.getCurrentPosition(function(position){
     if(valid){
       User.email = $scope.login.email;
       User.phoneNumber = $scope.login.phoneNumber;
-      socket.emit("signin",{email:$scope.login.email,name:$scope.login.name,phone:$scope.login.phoneNumber});
+      socket.emit("signin",{email:$scope.login.email,name:$scope.login.name,phone:$scope.login.number});
       $state.go("selectChores");
     }
     else{
