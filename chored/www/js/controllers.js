@@ -46,6 +46,11 @@ angular.module('starter.controllers', [])
     return prefix+url;
   }
 }])
+.service("User",function(){
+  this.user = {
+    email: "william@piecewise.com"
+  }
+})
 .service("Chores",function($http, envPrefix){
   this.chores = [];
   var that = this;
@@ -99,10 +104,60 @@ angular.module('starter.controllers', [])
 
   }
 })
-
-.controller('ChoreWheelCtrl', function($scope, Chores){
+.factory("formatDate",function(){
+  return function (myDate, format){
+    if(!(myDate instanceof Date)){
+      myDate = this.strToDate(myDate);
+    }
+    myDate.setDate(myDate.getDate()+7);
+    var y = myDate.getFullYear(),
+        m = ('0' + (myDate.getMonth()+1)).slice(-2),
+        d = ('0' + myDate.getDate()).slice(-2);
+    if(format){
+      return format.replace("m",m).replace("d",d).replace("y",y);
+    }
+    return m+"-"+ d + '-' + y;
+  }
+})
+.controller('ChoreWheelCtrl', function($scope, $ionicPopup, $timeout, Chores, $state, User, formatDate){
   $scope.Math = Math;
   $scope.chores = Chores;
+  angular.forEach(Chores,function(chore){
+    $scope.slideNum = 0;
+    if(chore.assignee == User.email){
+      $scope.slideNum = 1;
+      $scope.selectedChore = chore;
+      $scope.selectedChore.dueDate = formatDate(new Date());
+    }
+  });
+  
+  $scope.spin = function(){
+    var availableLocations = [];
+    angular.forEach(Chores,function(chore,index){
+      if(chore.status=="unassigned"){
+        availableLocations.push(index);
+      }
+    });
+    var randPos = Math.floor(Math.random()*availableLocations.length);
+    $scope.selectedChore = Chores[availableLocations[randPos]];
+    $scope.selectedChore.dueDate = formatDate(new Date());
+    var sectionPercentage = 360/Chores.length;
+    //15 for offset
+    var spinEndLoc = availableLocations[randPos]*sectionPercentage+3615;
+    
+    $(".spin-center").css({webkitTransform: "rotateZ("+spinEndLoc+"deg)",transform:"rotateZ("+spinEndLoc+"deg)"})
+    $timeout(function(){
+      $ionicPopup.alert({
+              title: 'Congratulations!',
+              template: "You got... " + $scope.selectedChore.name+"! Yay!!!",
+              okText: 'Okay',
+              okType: 'button-royal'
+            }).then(function(){
+              $scope.slideNum = 1;
+            });
+    },5250);
+    
+  }
 })
 
 .controller('signInCtrl', function($scope) {
@@ -117,4 +172,4 @@ angular.module('starter.controllers', [])
     { title: 'Oscar', id: 4, points: 43 },
     { title: 'Torey', id: 5, points: 89 },
     { title: 'Cowbell', id: 6, points: 0 }];
-});;
+});

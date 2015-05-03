@@ -1,3 +1,6 @@
+.padding{
+  padding: 16px;
+}
 @mixin circle($size) {
   content: "";
   position: absolute;
@@ -60,7 +63,7 @@ $colors: (#9ED110, #50B517, #179067, #476EAF, #9f49ac, #CC42A2, #FF3BA7, #FF5800
 .spin-center{
   -webkit-transition: all 5000ms cubic-bezier(0.645, 0.045, 0.355, 1);
   transition:         all 5000ms cubic-bezier(0.645, 0.045, 0.355, 1);
-  -webkit-transform: rotateZ(45deg);
+  -webkit-transform: rotateZ(15deg);
   width: 100px;
   height: 100px;
   border-radius: 50%;
