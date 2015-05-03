@@ -1,0 +1,18 @@
+.living-room .item {
+  background-color: rgba(0,0,0,0);
+}
+
+
+.messageContent {
+  background-color: white;
+  height: 100%;
+    & p.message {
+      position: absolute;
+      top: 8px;
+    }
+
+    & p.date {
+      position: absolute;
+      bottom: 8px;
+    }
+}
