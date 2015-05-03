@@ -1,0 +1,21 @@
+<ion-view  ng-controller="leaderboardCtrl"  view-title="chored">
+	<ion-content>
+		Leaderboard this Week
+		<ion-list>
+			<ion-item ng-repeat="leader in leaders | orderBy: '-points'">
+				 <div class='row leaderboard'>
+				 	<div class="thumbnail">
+				 		<img src="{{leader.img}}">
+				 	</div>
+				 	<div class="leader">
+				 		{{leader.title}} 
+				 	</div>
+				 	<div class="points row"> 
+				 		{{leader.points}} 
+				 	</div>
+				 </div>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+
+</ion-view>

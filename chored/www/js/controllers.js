@@ -158,4 +158,18 @@ angular.module('starter.controllers', [])
     },5250);
     
   }
+})
+
+.controller('signInCtrl', function($scope) {
+  [];
+})
+
+.controller('leaderboardCtrl', function($scope) {
+  $scope.leaders=[
+    { title: 'Shaheen', id: 1, points: 50 },
+    { title: 'Will', id: 2, points: 17 },
+    { title: 'MacKenzie', id: 3, points: 75 },
+    { title: 'Oscar', id: 4, points: 43 },
+    { title: 'Torey', id: 5, points: 89 },
+    { title: 'Cowbell', id: 6, points: 0 }];
 });
