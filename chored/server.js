@@ -76,6 +76,28 @@ io.on('connection', function(socket){
     socket.email = info.email;
     socket.userName = info.name;
     socket.phoneNumber = info.phone;
+    switch(info.name){
+      case 'Shaheen':
+        socket.userId = 1;
+        break;
+      case 'Will':
+        socket.userId = 2;
+        break;
+      case 'MacKenzie':
+        socket.userId = 3;
+        break;
+      case 'Oscar':
+        socket.userId = 4;
+        break;
+      case 'Torey':
+        socket.userId = 5;
+        break;
+      case 'Cowbell':
+        socket.userId = 6;
+        break;
+      default:
+        socket.id = 1;
+    }
     console.log(socket.email);
   })
 
@@ -139,12 +161,15 @@ io.on('connection', function(socket){
   socket.on('message',function(messageContent){
     //var thisMessage = clone(messageContent);
     var thisMessage = {};
+    thisMessage.senderId = socket.userId;
     thisMessage.senderName=socket.userName;
     thisMessage.content = messageContent.content;
     thisMessage.timeSent = new Date();
     var thatMessage = clone(thisMessage);
     messageLog.push(thatMessage);
     io.sockets.emit('newMessage',thisMessage);
+    console.log(messageLog);
+    console.log(thisMessage);
   });
 
 });
