@@ -7769,3 +7769,8 @@ a.button {
     border: 5px solid transparent;
     border-bottom: 40px solid black; }
 
+.living-room .scroll {
+  height: 100%; }
+  .living-room .scroll > * {
+    height: 100%; }
+

@@ -1,0 +1,43 @@
+<ion-view view-title="Living Room" class="living-room" cache-view="false">
+	<ion-content>
+		<ion-slide-box active-slide="room" show-pager="false">
+			<ion-slide class="padding">
+				<h2>{{user.apartment}}</h2>
+				<h4>Chores for {{today}} to {{oneWeekLater}}</h4>
+				<span class="icon ion-ios-chatbubble" ng-click="goToChat()"></span>
+				<ul>
+					<li ng-repeat="chore in chores | filter:{assignee:'!null'} track by chore.id">
+						<h5>{{chore.name}}</h5>
+						<!-- time completed -->
+						<p>{{chore.assignee}}</p>
+						<div class="user-completed" ng-if="chore.assignee!=user.email&&chore.timeCompleted!=null" ng-click="verifyPopup(chore)">
+							<span class="icon ion-ios-search"></span>
+							<span class="icon ion-plus"></span>
+						</div>
+						<!-- <a class="button" ng-click="verifyCompletion(chore)" ng-if="chore.assignee!=user.email&&chore.timeCompleted!=null">Validate Completion</a>
+						<a class="button" ng-click="didntComplete(chore)" ng-if="chore.assignee!=user.email&&chore.timeCompleted!=null">S/he lied!</a> -->
+						<p ng-if="chore.assignee==user.email&&chore.timeCompleted!=null">Awaiting roommate verification</p>
+					</li>
+				</ul>
+			</ion-slide>
+			<ion-slide class="padding" ng-controller="MessagesCtrl">
+				<ion-content>
+					<span class="icon ion-ios-arrow-back" ng-click="goToChoreAssignments()"></span>
+					<ul>
+						<li ng-repeat="message in messages">
+							<p class="username">{{message.name}}</p>
+							<div class="row">
+								<p class="col-75 col">{{message.content}}</p>
+								<p class="col-25 col">{{message.timeSent}}</p>
+							</div>
+						</li>
+					</ul>
+				</ion-content>
+				<form class="bar bar-footer bar-stable row" ng-submit="sendMessage()">
+				  <input type="text" name="message" class="col col-75" ng-model="message">
+				  <input type="submit" value="Send" class="col col-25">
+				</form>
+			</ion-slide>
+		</ion-slide-box>
+	</ion-content>
+</ion-view>

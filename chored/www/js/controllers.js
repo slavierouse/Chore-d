@@ -48,7 +48,8 @@ angular.module('starter.controllers', [])
 }])
 .factory("User",function(){
   var userEmail = window.localStorage.email,
-      userName = window.localStorage.name;
+      userName = window.localStorage.name,
+      apt = window.localStorage.apt;
   var user = Object.create(Object.prototype,{
     email:{
       get: function(){
@@ -67,6 +68,15 @@ angular.module('starter.controllers', [])
         userName = name;
         window.localStorage.name = name;
       }
+    },
+    apartment:{
+      get: function(){
+        return apt;
+      },
+      set: function(apt){
+        apt = apt;
+        window.localStorage.apt = apt;
+      }
     }
   })
   
@@ -75,9 +85,17 @@ angular.module('starter.controllers', [])
 .service("Chores",function($http, envPrefix){
   this.chores = [];
   var that = this;
-  $http.get(envPrefix.prefixUrl("chores")).success(function(chores){
-    $.merge(that.chores,chores);
-  });
+  this.get = function(){
+    $http.get(envPrefix.prefixUrl("chores")).success(function(chores){
+      that.chores.length = 0;
+      $.merge(that.chores,chores);
+    });  
+  }
+  this.get();
+  this.refresh = function(){ 
+    this.get();
+  }  
+
   /*$.merge(this.chores, [
     {
       id: 1,
@@ -116,10 +134,10 @@ angular.module('starter.controllers', [])
       added: false
     }
   ]);*/
-  return this.chores;
+  return this;
 })
 .controller('ChoreSelectionCtrl', function($scope, Chores) {
-  $scope.chores = Chores;
+  $scope.chores = Chores.chores;
 
   $scope.updateAddedStatus = function($event, chore){
     if(chore.selected){
@@ -137,7 +155,7 @@ angular.module('starter.controllers', [])
     if(!(myDate instanceof Date)){
       myDate = this.strToDate(myDate);
     }
-    myDate.setDate(myDate.getDate()+7);
+    
     var y = myDate.getFullYear(),
         m = ('0' + (myDate.getMonth()+1)).slice(-2),
         d = ('0' + myDate.getDate()).slice(-2);
@@ -149,16 +167,19 @@ angular.module('starter.controllers', [])
 })
 .controller('ChoreWheelCtrl', function($scope, $ionicPopup, $timeout, Chores, $state, $ionicHistory, $ionicNavBarDelegate, User, formatDate){
   $scope.Math = Math;
-  $scope.chores = Chores;
+  Chores.refresh();
+  $scope.chores = Chores.chores;
   $ionicHistory.clearHistory();
   $scope.$watch("chores.length",function(c){
-    angular.forEach(Chores,function(chore){
+    angular.forEach(Chores.chores,function(chore){
       $scope.slideNum = 0;
       if(chore.assignee == User.email){
         $timeout(function(){
           $scope.slideNum = 1;
           $scope.selectedChore = chore;
-          $scope.selectedChore.dueDate = formatDate(new Date());
+          var myDate = new Date();
+          myDate.setDate(myDate.getDate()+7);
+          $scope.selectedChore.dueDate = formatDate(myDate);
         },0)
         
       }
@@ -170,18 +191,29 @@ angular.module('starter.controllers', [])
       chore: {id: $scope.selectedChore.id},
       picture: 'abc'
     });
+    $ionicPopup.alert({
+      title: 'Excellent!',
+      template: "One of your roomies must confirm you've completed your chore. As soon as you do that, you can spin the wheel for next week's chore.",
+      okText: 'Okay',
+      okType: 'button-royal'
+    }).then(function(){
+      $state.go("home.livingRoom")
+      
+    });
   }
   $scope.spin = function(){
     var availableLocations = [];
-    angular.forEach(Chores,function(chore,index){
+    angular.forEach(Chores.chores,function(chore,index){
       if(chore.status=="unassigned"){
         availableLocations.push(index);
       }
     });
     var randPos = Math.floor(Math.random()*availableLocations.length);
-    $scope.selectedChore = Chores[availableLocations[randPos]];
-    $scope.selectedChore.dueDate = formatDate(new Date());
-    var sectionPercentage = 360/Chores.length;
+    $scope.selectedChore = Chores.chores[availableLocations[randPos]];
+    var myDate = new Date();
+    myDate.setDate(myDate.getDate()+7);
+    $scope.selectedChore.dueDate = formatDate(myDate);
+    var sectionPercentage = 360/Chores.chores.length;
     //15 for offset
     var spinEndLoc = availableLocations[randPos]*sectionPercentage+3615;
     
@@ -197,7 +229,7 @@ angular.module('starter.controllers', [])
               socket.emit("signin",{name:User.name,email:User.email});
               $timeout(function(){
                 socket.emit("choreAssign",{id:$scope.selectedChore.id});
-              },100)
+              },100);
               
             });
     },5250);
@@ -223,7 +255,87 @@ angular.module('starter.controllers', [])
     }
   }
 })
+.controller("LivingRoomCtrl",function($scope, Chores, User, formatDate, $ionicPopup,$timeout){
+  Chores.refresh();
+  $scope.chores = Chores.chores;
+  $scope.user = {
+    email:User.email,
+    apartment: User.apartment,
+    name: User.name
+  }
+  $scope.today = formatDate(new Date());
+  var myDate = new Date();
+  myDate.setDate(myDate.getDate()+7);
+  $scope.oneWeekLater = formatDate(myDate);
+  $scope.goToChat = function(){
+    $scope.room = 1;
+  }
+  $scope.goToChoreAssignments = function(){
+    $scope.room = 0;
+  }
+  $scope.verifyPopup = function(chore){
+    $ionicPopup.confirm({
+      title: chore.name,
+      template: 'Was the chore, "'+chore.name+'" completed by "'+chore.assignee+'?',
+      cancelText: 'S/he lied!',
+      okText: 'Completed',
+        okType: 'button-royal'
+    }).then(function(res) {
+      if(res){
+        verifyCompletion(chore);
+      }
+      else{
+        didntComplete(chore);
+      }
+      $timeout(function(){
+        Chores.refresh();
+      },250)
+    });
+  }
+  
+  function verifyCompletion(chore){
 
+    socket.emit('confirmChoreComplete',{
+      chore: {id: chore.id},
+      done: true
+    });
+  }
+  function didntComplete(chore){
+    socket.emit('confirmChoreComplete',{
+        chore: {id: chore.id},
+        done: true
+      });
+  }
+  socket.on('notifyChoreComplete', function(completeSendData){
+     var id = completeSendData.choreID;
+     angular.forEach($scope.chores, function(chore){
+      if(chore.id == id){
+        chore.assignee = completeSendData.senderId;
+      }
+     });
+     $scope.$digest();
+  });
+})
+.controller('MessagesCtrl',function($scope, $http, envPrefix, User, formatDate){
+  $scope.messages = [];
+  $http.get(envPrefix.prefixUrl("messages")).success(function(messages){
+    $.merge($scope.messages,messages);
+    angular.forEach($scope.messages,function(message){
+      message.timeSent = formatDate(new Date(message.timeSent))
+    });
+  });
+  $scope.sendMessage = function(){
+    socket.emit('message',{content: $scope.message});
+    $scope.message = '';
+
+  }
+
+  socket.on('newMessage',function(data){
+    data.timeSent = formatDate(new Date(data.timeSent));
+    $scope.messages.push(data);
+    $scope.$digest();
+  });
+})
 .controller('leaderboardCtrl', function($scope) {
   $scope.leaders=[
     { title: 'Shaheen', id: 1, points: 50 },

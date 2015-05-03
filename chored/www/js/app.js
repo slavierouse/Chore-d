@@ -48,7 +48,8 @@ angular.module('chored', ['ionic', 'starter.controllers'])
     url: "/living-room",
     views: {
       'menuContent': {
-        templateUrl: "templates/living-room.html"
+        templateUrl: "templates/living-room.html",
+        controller: "LivingRoomCtrl"
       }
     }
   })
