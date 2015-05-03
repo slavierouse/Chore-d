@@ -255,7 +255,7 @@ angular.module('starter.controllers', [])
     }
   }
 })
-.controller("LivingRoomCtrl",function($scope, Chores, User, formatDate, $ionicPopup){
+.controller("LivingRoomCtrl",function($scope, Chores, User, formatDate, $ionicPopup,$timeout){
   Chores.refresh();
   $scope.chores = Chores.chores;
   $scope.user = {
@@ -287,6 +287,9 @@ angular.module('starter.controllers', [])
       else{
         didntComplete(chore);
       }
+      $timeout(function(){
+        Chores.refresh();
+      },250)
     });
   }
   
