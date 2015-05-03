@@ -48,8 +48,9 @@ angular.module('starter.controllers', [])
 }])
 .service("Chores",function($http, envPrefix){
   this.chores = [];
+  var that = this;
   $http.get(envPrefix.prefixUrl("chores")).success(function(chores){
-    $.merge(this.chores,chores);
+    $.merge(that.chores,chores);
   });
   /*$.merge(this.chores, [
     {
@@ -99,5 +100,6 @@ angular.module('starter.controllers', [])
   }
 })
 .controller('ChoreWheelCtrl', function($scope, Chores){
+  $scope.Math = Math;
   $scope.chores = Chores;
 });

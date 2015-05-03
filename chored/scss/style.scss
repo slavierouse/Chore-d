@@ -1,0 +1,69 @@
+@mixin circle($size) {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  left: calc(50% - #{$size/2});
+  top: calc(50% - #{$size/2});
+  width: $size;
+  height: $size;
+}
+
+$wheel: 15em;
+.wheel, .umbrella, .color {
+  @include circle($wheel);
+}
+.wheel {
+  overflow: hidden;
+  width: $wheel;
+  height: $wheel;
+  position: relative;
+}
+/* .umbrella {
+  position: relative;
+  -webkit-filter: blur(1.7em);
+  -webkit-transform: scale(1.35);
+} */
+.color, .color:nth-child(n+4):after {
+  clip: rect(0, $wheel, $wheel, #{$wheel/2});
+}
+.color:after, .color:nth-child(n+4) {
+  @include circle($wheel);
+  clip: rect(0, #{$wheel/2}, $wheel, 0);
+}
+
+$colors: (#9ED110, #50B517, #179067, #476EAF, #9f49ac, #CC42A2, #FF3BA7, #FF5800, #FF8100, #FEAC00, #FFCC00, #EDE604);
+@for $i from 0 to 6 {
+  .color:nth-child(#{1+$i}):after {
+    background-color: nth($colors, $i+1);
+    @if $i < 3 {
+      transform: rotate(#{60*(1+$i)}deg);
+      z-index: #{length($colors)-$i};
+    } @else {
+      transform: rotate(#{-60+(60*(1+$i))}deg);
+    }
+  }
+}
+.wheel-spinner{
+    position: relative;
+  text-align: center;
+  z-index: 100;
+  top: 97px;
+  text-align: center;
+
+}
+.spin-center{
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #000;
+  display: inline-block;
+  position: relative;
+  &:after{
+    content:"";
+    position:absolute;
+    left: 2.5px;
+    top:-40px;
+    border: 5px solid transparent;
+    border-bottom: 40px solid black;
+  }
+}
