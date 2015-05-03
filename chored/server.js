@@ -75,7 +75,7 @@ io.on('connection', function(socket){
     console.log('sign in');
     socket.email = info.email;
     socket.userName = info.name;
-    socket.phoneNumber = "1" + info.phone;
+    socket.phoneNumber = info.phone;
     switch(info.name){
       case 'Shaheen':
         socket.userId = 1;
@@ -119,7 +119,7 @@ io.on('connection', function(socket){
         return false;
       };
       console.log('B: '+ allSocket.phoneNumber);
-      var httpUri = 'http://rest.nexmo.com/sms/json?api_key=0fa380ab&api_secret=1d06fbc9&from=12532715644&to=';
+      var httpUri = 'http://rest.nexmo.com/sms/json?api_key=0fa380ab&api_secret=1d06fbc9&from=12532715644&to=1';
       httpUri += allSocket.phoneNumber +'&text=';
       httpUri += socket.userName+" will do the " + chores[chore.id].name + " roomiezen:\\open";
       httpUri += " this week."
