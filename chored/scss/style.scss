@@ -7,6 +7,9 @@ body,h1,h2,h3,h4,h5,h6{
 .mt5, .row.mt5{
   margin-top: 5px;
 }
+.mt10, .row.mt10{
+  margin-top: 10px;
+}
 .mt20,h3.mt20{
   margin-top: 20px;
 }
@@ -144,18 +147,71 @@ $colors: (#E6E73B, #39B54A, #D09D00, #00C9FF, #178DFF, #FF3800);
     font-size: 20px;
   }
 }
-.wheel-view{
+.c50{
+  float: left;
+  width: 45%;
+  &:nth-child(even){
+    margin-left: 2.5%;
+    margin-right: 5%;
+  }
   
-  .box{
+}
+
+.box{
     background-color: #FFFF5C;
     padding: 16px;
+    position: relative;
+  }
+  .box-img{
+    width:calc(100% + 16px);
+    margin-left: -8px;
   }
   .box-header{
     background-color: #FFED8D;
     margin: -16px -16px 0 -16px;
     padding: 8px 16px;
   }
-}
-.assigned{
+  .living-room header{
 
+    h2,h4{
+      text-align: center;
+      color: #FFF;
+      margin: 0;
+      padding: 0;
+    }
+    h4{
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    h2{
+      font-size: 18px;
+      line-height: 1.5;
+      +span{
+        text-align: right;
+        font-size: 24px;
+        color: #FFF;
+        margin-top: -12px;
+        padding: 0;
+      }
+    }
+  }
+  .living-room .box{
+    padding:8px 8px 0 8px;
+    line-height: 0;
+  }
+  .living-room .box-header{
+    padding: 4px 8px;
+    margin: -8px -8px 0 -8px;
+    h5{
+      margin: 0;
+      font-size: 16px;
+    }
+  }
+.color.assigned:after{
+  background-color:rgba(0,0,0,.6)
+}
+.color-dot.assigned{
+  color: #FFF;
+  font-size: 18px;
+  text-align: center;
 }

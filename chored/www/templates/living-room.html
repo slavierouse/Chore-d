@@ -2,14 +2,23 @@
 	<ion-content>
 		<ion-slide-box active-slide="room" show-pager="false">
 			<ion-slide class="padding">
-				<h2>{{user.apartment}}</h2>
-				<h4>Chores for {{today}} to {{oneWeekLater}}</h4>
-				<span class="icon ion-ios-chatbubble" ng-click="goToChat()"></span>
+				<header>
+					<div class="row">
+						<h2 class="col col-80">{{user.apartment||'Apartment'}}</h2>
+						<span class="icon ion-chatbubbles col col-20" ng-click="goToChat()"></span>
+					</div>
+					<h4>Chores for {{today}} to {{oneWeekLater}}</h4>
+				</header>
+				
 				<ul>
-					<li ng-repeat="chore in chores | filter:{assignee:'!null'} track by chore.id">
-						<h5>{{chore.name}}</h5>
+					<li ng-repeat="chore in chores | filter:{assignee:'!null'} track by chore.id" class="box c50" ng-class="{'mt10':$index>1}">
+						<div class="box-header">
+							<h5>{{chore.name}}</h5>
+						</div>
 						<!-- time completed -->
-						<p>{{chore.assignee}}</p>
+						
+						<img src="img/profile-{{$index+1}}.jpg" class="box-img">
+						<!-- <p>{{chore.assignee}}</p> -->
 						<div class="user-completed" ng-if="chore.assignee!=user.email&&chore.timeCompleted!=null" ng-click="verifyPopup(chore)">
 							<span class="icon ion-ios-search"></span>
 							<span class="icon ion-plus"></span>

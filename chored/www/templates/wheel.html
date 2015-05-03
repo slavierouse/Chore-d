@@ -8,15 +8,15 @@
 					  <ul class="umbrella">
 					    <li class="color" ng-class="{'assigned': chore.status=='assigned'}" ng-repeat="chore in chores track by chore.id"></li>
 					  </ul>
-					  <div class="wheel-spinner" ng-click="spin()"><p>SPIN</p><div class="spin-center"></div></div>
+					  <div class="wheel-spinner" ng-click="spin()"><p>Spin</p><div class="spin-center"></div></div>
 					</div>
 				</div>
 				<div class="row">
 					<ul class="col col-50">
-						<li ng-repeat="chore in chores.slice(0,Math.floor(chores.length/2)) track by chore.id" class="row mt5"><div ng-style="{'background-color':colors[$index]}" class="col-20 col color-dot"></div><div class="col-80 col">{{chore.name}}</div></li>
+						<li ng-repeat="chore in chores.slice(0,Math.floor(chores.length/2)) track by chore.id" class="row mt5"><div ng-style="{'background-color':colors[$index]}" class="col-20 col color-dot" ng-class="{'icon ion-checkmark-round assigned':chore.assignee}"></div><div class="col-80 col">{{chore.name}}</div></li>
 					</ul>
 					<ul class="col col-50">
-						<li ng-repeat="chore in chores.slice(Math.floor(chores.length/2)) track by chore.id" class="row mt5"><div class="col-20 col color-dot" ng-style="{'background-color':colors[$index+chores.length/2]}"></div><div class="col-80 col">{{chore.name}}</div></li>
+						<li ng-repeat="chore in chores.slice(Math.floor(chores.length/2)) track by chore.id" class="row mt5"><div class="col-20 col color-dot" ng-style="{'background-color':colors[$index+chores.length/2]}" ng-class="{'assigned':chore.assignee}"></div><div class="col-80 col">{{chore.name}}</div></li>
 					</ul>
 				</div>
 			</ion-slide>
@@ -35,7 +35,7 @@
 					</div>
 				</div>
 				<div class="bar bar-footer bar-stable">
-					<a class="button" ng-click="completeChore()" ng-if="!selectedChore.timeCompleted">COMPLETE</a>
+					<p ng-click="completeChore()" ng-if="!selectedChore.timeCompleted">COMPLETE</p>
 					<p ng-if="selectedChore.timeCompleted">Completed, awaiting roommate approval</p>
 				</div>
 			</ion-slide>
