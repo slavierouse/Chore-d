@@ -6,3 +6,5 @@ platforms/
 plugins/
 .DS_Store
 ../.DS_Store
+www/css/ionic.app.css
+www/css/ionic.app.min.css

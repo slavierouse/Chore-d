@@ -75,7 +75,7 @@ io.on('connection', function(socket){
     console.log('sign in');
     socket.email = info.email;
     socket.userName = info.name;
-    socket.phoneNumber = info.phone;
+    socket.phoneNumber = "1" + info.phone;
     switch(info.name){
       case 'Shaheen':
         socket.userId = 1;
