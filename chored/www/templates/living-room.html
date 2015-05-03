@@ -22,10 +22,11 @@
 						<div class="user-completed" ng-if="chore.assignee!=user.email&&chore.timeCompleted!=null" ng-click="verifyPopup(chore)">
 							<span class="icon ion-ios-search"></span>
 							<span class="icon ion-plus"></span>
+							<p>DONE!</p>
 						</div>
 						<!-- <a class="button" ng-click="verifyCompletion(chore)" ng-if="chore.assignee!=user.email&&chore.timeCompleted!=null">Validate Completion</a>
 						<a class="button" ng-click="didntComplete(chore)" ng-if="chore.assignee!=user.email&&chore.timeCompleted!=null">S/he lied!</a> -->
-						<p ng-if="chore.assignee==user.email&&chore.timeCompleted!=null">Awaiting roommate verification</p>
+						<p ng-if="chore.assignee==user.email&&chore.timeCompleted!=null" class="await">Awaiting roommate verification</p>
 					</li>
 				</ul>
 			</ion-slide>

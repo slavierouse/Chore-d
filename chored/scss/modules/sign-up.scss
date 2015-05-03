@@ -1,4 +1,9 @@
+
 /*sign in page*/
+
+.select-chores, .sign-in {
+  min-height: 100vh;
+}
 .sign-in input {
   margin: 10px;
   color: white;
@@ -11,7 +16,7 @@
   line-height: 1em;
 }
 
-.sign-in button {
+.sign-in button, .select-chores button {
   position: absolute;
   width: 100%;
   left:0;
@@ -23,4 +28,27 @@
   font-size: 2em;
   line-height: 1em;
 }
+
+.select-chores .item {
+  background-color: rgba(0,0,0,0);
+  padding: 0px;
+}
+
+
+.select-chores .chore {
+  font-size: 1.2em;
+}
+
+.select-chores button.selchorbutton {
+   position: absolute;
+   width: 100%;
+   left:0;
+   bottom:0;
+   height: 50px;
+   border-radius: 0;
+   background-color: black;
+   color: white;
+   font-size: 2em;
+   line-height: 1em;
+ }
 

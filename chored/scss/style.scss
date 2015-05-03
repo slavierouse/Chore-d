@@ -16,6 +16,50 @@ body,h1,h2,h3,h4,h5,h6{
 .color-dot{
   border-radius: 50%;
 }
+.title.title-center.header-item{
+  background-image: url(../img/main-logo-big.png);
+  background-size: cover;
+  background-position: center;
+  text-indent: 9999px;
+  min-width: 200px;
+}
+.await,.user-completed{
+    position: absolute;
+  top: 60px;
+  /* width: 100%; */
+  white-space: normal;
+  /* height: 67px; */
+  /* display: none; */
+  line-height: 1.1;
+  color: white;
+  background: rgba(0,0,0,.7);
+  padding: 5px;
+  margin-right: 8px;
+  text-align: center;
+}
+.user-completed{
+    left: 0px;
+  top: 26px;
+  height: calc(100% - 26px);
+  width: 100%;
+  font-weight: bold;
+  padding-top:20px;
+  >.icon{
+    font-size: 20px;
+    vertical-align: top;
+    &.ion-ios-search{
+      font-size: 40px;
+    }
+    &.ion-plus:before{
+        vertical-align: top;
+        margin-top: 7px;
+        margin-left: -29px;
+    }
+  }
+  >p{
+    font-size: 20px;
+  }
+}
 .scroll-content{
    background: -webkit-linear-gradient(#3fffa6, #b0dcff); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient( #3fffa6, #b0dcff); /* For Opera 11.1 to 12.0 */
@@ -32,7 +76,7 @@ body,h1,h2,h3,h4,h5,h6{
   }
 }
 ion-side-menu .scroll-content{
-  background: #FFF;
+ background: #FFF;
 }
 @mixin circle($size) {
   content: "";
@@ -172,7 +216,6 @@ $colors: (#E6E73B, #39B54A, #D09D00, #00C9FF, #178DFF, #FF3800);
     padding: 8px 16px;
   }
   .living-room header{
-
     h2,h4{
       text-align: center;
       color: #FFF;
@@ -215,3 +258,4 @@ $colors: (#E6E73B, #39B54A, #D09D00, #00C9FF, #178DFF, #FF3800);
   font-size: 18px;
   text-align: center;
 }
+
