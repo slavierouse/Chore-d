@@ -1,17 +1,20 @@
 <ion-view  ng-controller="leaderboardCtrl"  view-title="roomiezen">
 	<ion-content>
-		Leaderboard this Week
-		<ion-list>
+		<h2 class="text-center padding-top padding-bottom">
+			Leaderboard this Week
+		</h2>
+		<ion-list class="">
 			<ion-item ng-repeat="leader in leaders | orderBy: '-points'">
-				 <div class='row leaderboard'>
-				 	<div class="thumbnail">
-				 		<img src="{{leader.img}}">
+				 <div class='list list-inset row leaderboard '>
+				 	<div class="item-thumbnail-left col-10">
+				 		<img src="http://i.imgur.com/w2oP8Go.jpg">
 				 	</div>
-				 	<div class="leader">
+				 	<div class="leader col-50 ">
 				 		{{leader.title}} 
 				 	</div>
-				 	<div class="points row"> 
-				 		{{leader.points}} 
+				 	<div class="points col-20 text-center"> 
+				 		<p> {{leader.points}}</p>
+				 		 <p class="text-center">points</p>
 				 	</div>
 				 </div>
 			</ion-item>
