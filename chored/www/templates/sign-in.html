@@ -1,15 +1,15 @@
 <ion-view  ng-controller="signInCtrl" hide-nav-bar="true" cache-view="false" view-title="">
 <form class="app-bkgd sign-in" method="post" action="javascript:void(0)" id="register" ng-submit="signIn()" class="padding" novalidate>
 	<div class="centering-block padding">
-		<div class="centered">
+		<div class="centered sign-in">
 			<img src="images/logo-alternate.png" class="logo">
 			<input type="text" name="name" placeholder="Your name" ng-model="login.name" required>
 			<input type="email" name="email" placeholder="Your email" ng-model="login.email" required>
-			<input type='phone' name='phone' palceholder='Your Phone number' ng-model='login.phone' required>
+			<input type='number' name='phone' palceholder='Your Phone number' ng-model='login.phone' required>
 			<input type="password" name="password" placeholder="Password" ng-model="login.password" required>
-			<input type="text" name="email" placeholder="Apartment Address" ng-model="login.address" required>
+			<input type="text" name="email" placeholder="Address" ng-model="login.address" required>
 			<span class="error" ng-show="err">{{err}}</span>
-			<input type="submit" value="Next" class="sign-up-btn">
+			<button type="submit" value="Next" class="sign-up-btn">Finished</button>
 		</div>
 	</div>
 </form>

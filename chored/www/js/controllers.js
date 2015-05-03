@@ -239,7 +239,7 @@ return this;
 
 .controller('signInCtrl', function($scope, $state, User, $http) {
   $scope.login = {};
-  $scope.login.address ='test';
+  $scope.login.address ='';
   //var $scope.login.address = '';
   navigator.geolocation.getCurrentPosition(function(position){
     $http.get('http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?location=' + Math.round(position.coords.longitude*1000000)/1000000 + ',' +Math.round(position.coords.latitude*1000000)/1000000 +'&f=json&distance=500').success(function(reply){
