@@ -2,6 +2,7 @@
 	<ion-content>
 		<ion-slide-box show-pager="false" delegate-handle="wheel-assignments" active-slide="slideNum">
         	<ion-slide>
+        		<h3 class="mt20">Pick your chores</h3>
 				<div class="row">
 					<div class="wheel">
 					  <ul class="umbrella">
@@ -12,10 +13,10 @@
 				</div>
 				<div class="row">
 					<ul class="col col-50">
-						<li ng-repeat="chore in chores.slice(0,Math.floor(chores.length/2)) track by chore.id">{{chore.name}}</li>
+						<li ng-repeat="chore in chores.slice(0,Math.floor(chores.length/2)) track by chore.id" class="row mt5"><div ng-style="{'background-color':colors[$index]}" class="col-20 col color-dot"></div><div class="col-80 col">{{chore.name}}</div></li>
 					</ul>
 					<ul class="col col-50">
-						<li ng-repeat="chore in chores.slice(Math.floor(chores.length/2)) track by chore.id">{{chore.name}}</li>
+						<li ng-repeat="chore in chores.slice(Math.floor(chores.length/2)) track by chore.id" class="row mt5"><div class="col-20 col color-dot" ng-style="{'background-color':colors[$index+chores.length/2]}"></div><div class="col-80 col">{{chore.name}}</div></li>
 					</ul>
 				</div>
 			</ion-slide>

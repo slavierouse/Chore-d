@@ -185,7 +185,7 @@ return this;
       }
     });
   });
-
+  $scope.colors = ["#E6E73B", "#39B54A", "#D09D00", "#00C9FF", "#178DFF", "#FF3800"]
   $scope.completeChore = function(){
     socket.emit('submitChoreComplete',{
       chore: {id: $scope.selectedChore.id},

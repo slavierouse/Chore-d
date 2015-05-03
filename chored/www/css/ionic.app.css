@@ -7675,8 +7675,20 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+body, h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', sans-serif; }
+
 .padding {
   padding: 16px; }
+
+.mt5, .row.mt5 {
+  margin-top: 5px; }
+
+.mt20, h3.mt20 {
+  margin-top: 20px; }
+
+.color-dot {
+  border-radius: 50%; }
 
 .scroll-content {
   background: -webkit-linear-gradient(#3fffa6, #b0dcff);
@@ -7687,6 +7699,12 @@ a.button {
   /* For Firefox 3.6 to 15 */
   background: linear-gradient(#3fffa6, #b0dcff);
   /* Standard syntax (must be last) */ }
+
+.nav-bar-block .bar-stable, .nav-bar-block .bar.bar-stable .title, .menu-left .bar.bar-header {
+  background-color: #00C9FF;
+  color: #FFF; }
+  .nav-bar-block .bar-stable .button-icon, .nav-bar-block .bar.bar-stable .title .button-icon, .menu-left .bar.bar-header .button-icon {
+    color: #FFF; }
 
 ion-side-menu .scroll-content {
   background: #FFF; }
@@ -7725,30 +7743,30 @@ ion-side-menu .scroll-content {
   clip: rect(0, 7.5em, 15em, 0); }
 
 .color:nth-child(1):after {
-  background-color: #9ED110;
+  background-color: #E6E73B;
   transform: rotate(60deg);
-  z-index: 12; }
+  z-index: 6; }
 
 .color:nth-child(2):after {
-  background-color: #50B517;
+  background-color: #39B54A;
   transform: rotate(120deg);
-  z-index: 11; }
+  z-index: 5; }
 
 .color:nth-child(3):after {
-  background-color: #179067;
+  background-color: #D09D00;
   transform: rotate(180deg);
-  z-index: 10; }
+  z-index: 4; }
 
 .color:nth-child(4):after {
-  background-color: #476EAF;
+  background-color: #00C9FF;
   transform: rotate(180deg); }
 
 .color:nth-child(5):after {
-  background-color: #9f49ac;
+  background-color: #178DFF;
   transform: rotate(240deg); }
 
 .color:nth-child(6):after {
-  background-color: #CC42A2;
+  background-color: #FF3800;
   transform: rotate(300deg); }
 
 .wheel-spinner {
@@ -7797,18 +7815,19 @@ ion-side-menu .scroll-content {
     line-height: 1;
     font-size: 16px; }
 
-.wheel-view h3 {
+.scroll h3 {
   color: #FFF;
   font-size: 16px;
   text-align: center;
   margin-bottom: 20px; }
-.wheel-view h4 {
+.scroll h4 {
   text-align: center;
   font-size: 16px;
   font-weight: normal; }
-.wheel-view h5 {
+.scroll h5 {
   text-align: center;
   font-size: 20px; }
+
 .wheel-view .box {
   background-color: #FFFF5C;
   padding: 16px; }

@@ -1,11 +1,32 @@
+body,h1,h2,h3,h4,h5,h6{
+  font-family: 'Roboto', sans-serif;
+}
 .padding{
   padding: 16px;
+}
+.mt5, .row.mt5{
+  margin-top: 5px;
+}
+.mt20,h3.mt20{
+  margin-top: 20px;
+}
+.color-dot{
+  border-radius: 50%;
 }
 .scroll-content{
    background: -webkit-linear-gradient(#3fffa6, #b0dcff); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient( #3fffa6, #b0dcff); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient( #3fffa6, #b0dcff); /* For Firefox 3.6 to 15 */
     background: linear-gradient( #3fffa6, #b0dcff); /* Standard syntax (must be last) */
+}
+.nav-bar-block .bar-stable,
+.nav-bar-block .bar.bar-stable .title, 
+.menu-left .bar.bar-header{
+  background-color: #00C9FF;
+  color: #FFF;
+  .button-icon{
+    color: #FFF;
+  }
 }
 ion-side-menu .scroll-content{
   background: #FFF;
@@ -43,7 +64,7 @@ $wheel: 15em;
   clip: rect(0, #{$wheel/2}, $wheel, 0);
 }
 
-$colors: (#9ED110, #50B517, #179067, #476EAF, #9f49ac, #CC42A2, #FF3BA7, #FF5800, #FF8100, #FEAC00, #FFCC00, #EDE604);
+$colors: (#E6E73B, #39B54A, #D09D00, #00C9FF, #178DFF, #FF3800);
 @for $i from 0 to 6 {
   .color:nth-child(#{1+$i}):after {
     background-color: nth($colors, $i+1);
@@ -106,7 +127,7 @@ $colors: (#9ED110, #50B517, #179067, #476EAF, #9f49ac, #CC42A2, #FF3BA7, #FF5800
     font-size:16px;
   }
 }
-.wheel-view{
+.scroll{
   h3{
     color: #FFF;
     font-size: 16px;
@@ -122,6 +143,9 @@ $colors: (#9ED110, #50B517, #179067, #476EAF, #9f49ac, #CC42A2, #FF3BA7, #FF5800
     text-align: center;
     font-size: 20px;
   }
+}
+.wheel-view{
+  
   .box{
     background-color: #FFFF5C;
     padding: 16px;
