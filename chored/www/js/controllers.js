@@ -287,10 +287,11 @@ return this;
   $scope.verifyPopup = function(chore){
     $ionicPopup.confirm({
       title: chore.name,
-      template: 'Was the chore, "'+chore.name+'" completed by "'+chore.assignee+'?',
+      template: 'Was the chore, "'+chore.name+'" completed by '+chore.assignee+'?',
       cancelText: 'S/he lied!',
+      cancelType: 'button button-dark',
       okText: 'Completed',
-      okType: 'button-royal'
+      okType: 'button button-dark-grn'
     }).then(function(res) {
       if(res){
         verifyCompletion(chore);
@@ -349,10 +350,10 @@ return this;
 })
 .controller('leaderboardCtrl', function($scope) {
   $scope.leaders=[
-  { title: 'Shaheen', id: 1, points: 50 },
-  { title: 'Will', id: 2, points: 17 },
-  { title: 'MacKenzie', id: 3, points: 75 },
-  { title: 'Oscar', id: 4, points: 43 },
-  { title: 'Torey', id: 5, points: 89 },
-  { title: 'Cowbell', id: 6, points: 0 }];
+  { title: 'Will', id: 1, points: 50 },
+  { title: 'Oscar', id: 2, points: 17 },
+  { title: 'Shaheen', id: 3, points: 75 },
+  { title: 'Torey', id: 4, points: 43 },
+  { title: 'Cowbell', id: 5, points: 89 },
+  { title: 'MacKenzie', id: 6, points: 0 }];
 });
