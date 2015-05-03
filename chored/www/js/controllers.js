@@ -46,10 +46,31 @@ angular.module('starter.controllers', [])
     return prefix+url;
   }
 }])
-.service("User",function(){
-  this.user = {
-    email: "william@piecewise.com"
-  }
+.factory("User",function(){
+  var userEmail = window.localStorage.email,
+      userName = window.localStorage.name;
+  var user = Object.create(Object.prototype,{
+    email:{
+      get: function(){
+        return userEmail;
+      },
+      set: function(email){
+        userEmail = email;
+        window.localStorage.email = email;
+      }
+    },
+    name:{
+      get: function(){
+        return userName;
+      },
+      set: function(name){
+        userName = name;
+        window.localStorage.name = name;
+      }
+    }
+  })
+  
+  return user;
 })
 .service("Chores",function($http, envPrefix){
   this.chores = [];
@@ -101,7 +122,14 @@ angular.module('starter.controllers', [])
   $scope.chores = Chores;
 
   $scope.updateAddedStatus = function($event, chore){
-
+    if(chore.selected){
+      socket.emit("choreUnselect",{id: chore.id});
+      console.log('un')
+    }
+    else{
+      socket.emit("choreSelect",{id: chore.id})
+    }
+    
   }
 })
 .factory("formatDate",function(){
@@ -119,18 +147,30 @@ angular.module('starter.controllers', [])
     return m+"-"+ d + '-' + y;
   }
 })
-.controller('ChoreWheelCtrl', function($scope, $ionicPopup, $timeout, Chores, $state, User, formatDate){
+.controller('ChoreWheelCtrl', function($scope, $ionicPopup, $timeout, Chores, $state, $ionicHistory, $ionicNavBarDelegate, User, formatDate){
   $scope.Math = Math;
   $scope.chores = Chores;
-  angular.forEach(Chores,function(chore){
-    $scope.slideNum = 0;
-    if(chore.assignee == User.email){
-      $scope.slideNum = 1;
-      $scope.selectedChore = chore;
-      $scope.selectedChore.dueDate = formatDate(new Date());
-    }
+  $ionicHistory.clearHistory();
+  $scope.$watch("chores.length",function(c){
+    angular.forEach(Chores,function(chore){
+      $scope.slideNum = 0;
+      if(chore.assignee == User.email){
+        $timeout(function(){
+          $scope.slideNum = 1;
+          $scope.selectedChore = chore;
+          $scope.selectedChore.dueDate = formatDate(new Date());
+        },0)
+        
+      }
+    });
   });
   
+  $scope.completeChore = function(){
+    socket.emit('submitChoreComplete',{
+      chore: {id: $scope.selectedChore.id},
+      picture: 'abc'
+    });
+  }
   $scope.spin = function(){
     var availableLocations = [];
     angular.forEach(Chores,function(chore,index){
@@ -154,14 +194,34 @@ angular.module('starter.controllers', [])
               okType: 'button-royal'
             }).then(function(){
               $scope.slideNum = 1;
+              socket.emit("signin",{name:User.name,email:User.email});
+              $timeout(function(){
+                socket.emit("choreAssign",{id:$scope.selectedChore.id});
+              },100)
+              
             });
     },5250);
     
   }
 })
 
-.controller('signInCtrl', function($scope) {
-  [];
+.controller('signInCtrl', function($scope, $state, User) {
+  $scope.signIn = function(){
+    var valid = true;
+    for(var i in $scope.login){
+      if(!$scope.login[i]){
+        valid = false;
+      }
+    }
+    if(valid){
+      User.email = $scope.login.email;
+      socket.emit("signin",{email:$scope.login.email,name:$scope.login.name});
+      $state.go("selectChores");
+    }
+    else{
+      $scope.err = "You forgot a field";
+    }
+  }
 })
 
 .controller('leaderboardCtrl', function($scope) {
