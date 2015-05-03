@@ -95,7 +95,14 @@ angular.module('starter.controllers', [])
 .controller('ChoreSelectionCtrl', function($scope, Chores) {
   $scope.chores = Chores;
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
+  $scope.updateAddedStatus = function($event, chore){
+
+  }
+})
+
+.controller('ChoreWheelCtrl', function($scope, Chores){
+  $scope.Math = Math;
+  $scope.chores = Chores;
 })
 
 .controller('signInCtrl', function($scope) {
@@ -110,15 +117,4 @@ angular.module('starter.controllers', [])
     { title: 'Oscar', id: 4, points: 43 },
     { title: 'Torey', id: 5, points: 89 },
     { title: 'Cowbell', id: 6, points: 0 }];
-});
-
-  $scope.updateAddedStatus = function($event, chore){
-
-  }
-})
-
-.controller('ChoreWheelCtrl', function($scope, Chores){
-  $scope.Math = Math;
-  $scope.chores = Chores;
-});
-
+});;
