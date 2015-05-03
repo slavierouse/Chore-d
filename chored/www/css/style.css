@@ -74,4 +74,21 @@
 	margin-right: 20px;
 
 }
+/*header*/
 
+.nav-bar-block .bar.bar-stable .title, .menu-left .bar.bar-header {
+	color: white;
+	background-color: #2A2A2A;
+	font-size: 2em;
+	padding-top: 7px;
+
+}
+.nav-bar-block .bar.bar-stable{
+	background-color: #2A2A2A;
+}
+.menu-left .bar.bar-header .title {
+	color: white;
+}
+.nav-bar-block .bar-stable .button.button-clear {
+	color: white;
+}
