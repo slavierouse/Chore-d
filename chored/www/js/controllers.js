@@ -167,6 +167,7 @@ angular.module('starter.controllers', [])
 })
 .controller('ChoreWheelCtrl', function($scope, $ionicPopup, $timeout, Chores, $state, $ionicHistory, $ionicNavBarDelegate, User, formatDate){
   $scope.Math = Math;
+  Chores.refresh();
   $scope.chores = Chores.chores;
   $ionicHistory.clearHistory();
   $scope.$watch("chores.length",function(c){
@@ -254,7 +255,7 @@ angular.module('starter.controllers', [])
     }
   }
 })
-.controller("LivingRoomCtrl",function($scope, Chores, User, formatDate){
+.controller("LivingRoomCtrl",function($scope, Chores, User, formatDate, $ionicPopup){
   Chores.refresh();
   $scope.chores = Chores.chores;
   $scope.user = {
@@ -269,11 +270,67 @@ angular.module('starter.controllers', [])
   $scope.goToChat = function(){
     $scope.room = 1;
   }
+  $scope.goToChoreAssignments = function(){
+    $scope.room = 0;
+  }
+  $scope.verifyPopup = function(chore){
+    $ionicPopup.confirm({
+      title: chore.name,
+      template: 'Was the chore, "'+chore.name+'" completed by "'+chore.assignee+'?',
+      cancelText: 'S/he lied!',
+      okText: 'Completed',
+        okType: 'button-royal'
+    }).then(function(res) {
+      if(res){
+        verifyCompletion(chore);
+      }
+      else{
+        didntComplete(chore);
+      }
+    });
+  }
+  
+  function verifyCompletion(chore){
+
+    socket.emit('confirmChoreComplete',{
+      chore: {id: chore.id},
+      done: true
+    });
+  }
+  function didntComplete(chore){
+    socket.emit('confirmChoreComplete',{
+        chore: {id: chore.id},
+        done: true
+      });
+  }
+  socket.on('notifyChoreComplete', function(completeSendData){
+     var id = completeSendData.choreID;
+     angular.forEach($scope.chores, function(chore){
+      if(chore.id == id){
+        chore.assignee = completeSendData.senderId;
+      }
+     });
+     $scope.$digest();
+  });
 })
-.controller('MessagesCtrl',function($scope, $http, envPrefix){
+.controller('MessagesCtrl',function($scope, $http, envPrefix, User, formatDate){
   $scope.messages = [];
   $http.get(envPrefix.prefixUrl("messages")).success(function(messages){
     $.merge($scope.messages,messages);
+    angular.forEach($scope.messages,function(message){
+      message.timeSent = formatDate(new Date(message.timeSent))
+    });
+  });
+  $scope.sendMessage = function(){
+    socket.emit('message',{content: $scope.message});
+    $scope.message = '';
+
+  }
+
+  socket.on('newMessage',function(data){
+    data.timeSent = formatDate(new Date(data.timeSent));
+    $scope.messages.push(data);
+    $scope.$digest();
   });
 })
 .controller('leaderboardCtrl', function($scope) {
