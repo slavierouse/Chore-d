@@ -7836,3 +7836,26 @@ ion-side-menu .scroll-content {
   margin: -16px -16px 0 -16px;
   padding: 8px 16px; }
 
+/*sign in page*/
+.sign-in input {
+  margin: 10px;
+  color: white;
+  border: none;
+  border-bottom: 1px solid white;
+  padding-bottom: 2px;
+  text-align: left;
+  background-color: transparent;
+  font-size: 2em;
+  line-height: 1em; }
+
+.sign-in button {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  height: 50px;
+  border-radius: 0;
+  background-color: black;
+  color: white;
+  font-size: 2em;
+  line-height: 1em; }
