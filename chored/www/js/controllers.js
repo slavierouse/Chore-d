@@ -37,10 +37,10 @@ angular.module('starter.controllers', [])
   var prefix;
   switch(ENV){
     case "prod":
-      prefix = "http://209.208.27.193/";
-      break;
+    prefix = "http://209.208.27.193/";
+    break;
     default:
-      prefix = "http://209.208.27.193/";
+    prefix = "http://209.208.27.193/";
   }
   this.prefixUrl=function(url){
     return prefix+url;
@@ -48,8 +48,8 @@ angular.module('starter.controllers', [])
 }])
 .factory("User",function(){
   var userEmail = window.localStorage.email,
-      userName = window.localStorage.name,
-      apt = window.localStorage.apt;
+  userName = window.localStorage.name,
+  apt = window.localStorage.apt;
   var user = Object.create(Object.prototype,{
     email:{
       get: function(){
@@ -79,7 +79,7 @@ angular.module('starter.controllers', [])
       }
     }
   })
-  
+
   return user;
 })
 .service("Chores",function($http, envPrefix){
@@ -89,12 +89,12 @@ angular.module('starter.controllers', [])
     $http.get(envPrefix.prefixUrl("chores")).success(function(chores){
       that.chores.length = 0;
       $.merge(that.chores,chores);
-    });  
+    });
   }
   this.get();
-  this.refresh = function(){ 
+  this.refresh = function(){
     this.get();
-  }  
+  }
 
   /*$.merge(this.chores, [
     {
@@ -133,8 +133,8 @@ angular.module('starter.controllers', [])
       assigned: false,
       added: false
     }
-  ]);*/
-  return this;
+    ]);*/
+return this;
 })
 .controller('ChoreSelectionCtrl', function($scope, Chores) {
   $scope.chores = Chores.chores;
@@ -147,7 +147,7 @@ angular.module('starter.controllers', [])
     else{
       socket.emit("choreSelect",{id: chore.id})
     }
-    
+
   }
 })
 .factory("formatDate",function(){
@@ -155,10 +155,10 @@ angular.module('starter.controllers', [])
     if(!(myDate instanceof Date)){
       myDate = this.strToDate(myDate);
     }
-    
+
     var y = myDate.getFullYear(),
-        m = ('0' + (myDate.getMonth()+1)).slice(-2),
-        d = ('0' + myDate.getDate()).slice(-2);
+    m = ('0' + (myDate.getMonth()+1)).slice(-2),
+    d = ('0' + myDate.getDate()).slice(-2);
     if(format){
       return format.replace("m",m).replace("d",d).replace("y",y);
     }
@@ -181,11 +181,11 @@ angular.module('starter.controllers', [])
           myDate.setDate(myDate.getDate()+7);
           $scope.selectedChore.dueDate = formatDate(myDate);
         },0)
-        
+
       }
     });
   });
-  
+
   $scope.completeChore = function(){
     socket.emit('submitChoreComplete',{
       chore: {id: $scope.selectedChore.id},
@@ -198,7 +198,7 @@ angular.module('starter.controllers', [])
       okType: 'button-royal'
     }).then(function(){
       $state.go("home.livingRoom")
-      
+
     });
   }
   $scope.spin = function(){
@@ -216,28 +216,38 @@ angular.module('starter.controllers', [])
     var sectionPercentage = 360/Chores.chores.length;
     //15 for offset
     var spinEndLoc = availableLocations[randPos]*sectionPercentage+3615;
-    
+
     $(".spin-center").css({webkitTransform: "rotateZ("+spinEndLoc+"deg)",transform:"rotateZ("+spinEndLoc+"deg)"})
     $timeout(function(){
       $ionicPopup.alert({
-              title: 'Congratulations!',
-              template: "You got... " + $scope.selectedChore.name+"! Yay!!!",
-              okText: 'Okay',
-              okType: 'button-royal'
-            }).then(function(){
-              $scope.slideNum = 1;
-              socket.emit("signin",{name:User.name,email:User.email});
-              $timeout(function(){
-                socket.emit("choreAssign",{id:$scope.selectedChore.id});
-              },100);
-              
-            });
+        title: 'Congratulations!',
+        template: "You got... " + $scope.selectedChore.name+"! Yay!!!",
+        okText: 'Okay',
+        okType: 'button-royal'
+      }).then(function(){
+        $scope.slideNum = 1;
+        socket.emit("signin",{name:User.name,email:User.email});
+        $timeout(function(){
+          socket.emit("choreAssign",{id:$scope.selectedChore.id});
+        },100);
+
+      });
     },5250);
-    
+
   }
 })
 
-.controller('signInCtrl', function($scope, $state, User) {
+.controller('signInCtrl', function($scope, $state, User, $http) {
+  $scope.login = {};
+  $scope.login.address ='test';
+  //var $scope.login.address = '';
+  navigator.geolocation.getCurrentPosition(function(position){
+    $http.get('http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?location=' + Math.round(position.coords.longitude*1000000)/1000000 + ',' +Math.round(position.coords.latitude*1000000)/1000000 +'&f=json&distance=500').success(function(reply){
+      $scope.login.address = reply.address.Address;
+    });
+  });
+
+
   $scope.signIn = function(){
     var valid = true;
     for(var i in $scope.login){
@@ -247,7 +257,8 @@ angular.module('starter.controllers', [])
     }
     if(valid){
       User.email = $scope.login.email;
-      socket.emit("signin",{email:$scope.login.email,name:$scope.login.name});
+      User.phoneNumber = $scope.login.phoneNumber;
+      socket.emit("signin",{email:$scope.login.email,name:$scope.login.name,phone:$scope.login.phoneNumber});
       $state.go("selectChores");
     }
     else{
@@ -279,7 +290,7 @@ angular.module('starter.controllers', [])
       template: 'Was the chore, "'+chore.name+'" completed by "'+chore.assignee+'?',
       cancelText: 'S/he lied!',
       okText: 'Completed',
-        okType: 'button-royal'
+      okType: 'button-royal'
     }).then(function(res) {
       if(res){
         verifyCompletion(chore);
@@ -292,7 +303,7 @@ angular.module('starter.controllers', [])
       },250)
     });
   }
-  
+
   function verifyCompletion(chore){
 
     socket.emit('confirmChoreComplete',{
@@ -302,19 +313,19 @@ angular.module('starter.controllers', [])
   }
   function didntComplete(chore){
     socket.emit('confirmChoreComplete',{
-        chore: {id: chore.id},
-        done: true
-      });
+      chore: {id: chore.id},
+      done: true
+    });
   }
   socket.on('notifyChoreComplete', function(completeSendData){
-     var id = completeSendData.choreID;
-     angular.forEach($scope.chores, function(chore){
-      if(chore.id == id){
-        chore.assignee = completeSendData.senderId;
-      }
-     });
-     $scope.$digest();
+   var id = completeSendData.choreID;
+   angular.forEach($scope.chores, function(chore){
+    if(chore.id == id){
+      chore.assignee = completeSendData.senderId;
+    }
   });
+   $scope.$digest();
+ });
 })
 .controller('MessagesCtrl',function($scope, $http, envPrefix, User, formatDate){
   $scope.messages = [];
@@ -338,10 +349,10 @@ angular.module('starter.controllers', [])
 })
 .controller('leaderboardCtrl', function($scope) {
   $scope.leaders=[
-    { title: 'Shaheen', id: 1, points: 50 },
-    { title: 'Will', id: 2, points: 17 },
-    { title: 'MacKenzie', id: 3, points: 75 },
-    { title: 'Oscar', id: 4, points: 43 },
-    { title: 'Torey', id: 5, points: 89 },
-    { title: 'Cowbell', id: 6, points: 0 }];
+  { title: 'Shaheen', id: 1, points: 50 },
+  { title: 'Will', id: 2, points: 17 },
+  { title: 'MacKenzie', id: 3, points: 75 },
+  { title: 'Oscar', id: 4, points: 43 },
+  { title: 'Torey', id: 5, points: 89 },
+  { title: 'Cowbell', id: 6, points: 0 }];
 });
