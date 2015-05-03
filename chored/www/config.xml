@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget xmlns		= "http://www.w3.org/ns/widgets"
+	xmlns:gap	= "http://phonegap.com/ns/1.0"
+	id		= "com.roomiezen.roomiezenapp"
+	versionCode="1" 
+    version   = "1.0.0">
+	<name>RoomieZen</name>
+
+	<description>
+		Restore roommate harmony
+	</description>
+	<content src="index.html"/>
+	<author href="http://github.com/willyboy"
+		email="william@piecewise.com">
+		William Neely
+	</author>
+	<gap:platform name="ios" />
+	<gap:platform name="android" />
+	<preference name="phonegap-version" value="3.6.3" />
+		
+	<access origin="*" />
+	<feature name="http://api.phonegap.com/1.0/device" />
+	<feature name="http://api.phonegap.com/1.0/network" />
+	<gap:plugin name="org.apache.cordova.inappbrowser" version="0.5.2" />
+	<gap:plugin name="org.apache.cordova.statusbar" version="0.1.4" />
+	<gap:plugin name="org.apache.cordova.dialogs" version="0.2.10" />
+	<gap:plugin name="org.apache.cordova.network-information" version="0.2.12" />
+	<gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
+	<gap:plugin name="org.apache.cordova.geolocation" version="0.3.10" />
+	<!-- <gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.8.1" />
+	<gap:plugin name="com.plugin.datepicker" version="0.4.0" />
+	<gap:plugin name="nl.x-services.plugins.toast" version="2.0.2" />
+	<gap:plugin name="nl.x-services.plugins.calendar" version="4.2.4" /> -->
+	<gap:plugin name="com.ionic.keyboard" version="1.0.3" />
+	<gap:plugin name="com.shazron.cordova.plugin.keychainutil" version="1.0.0" />
+	<gap:plugin name="com.jchalan.cordova.ios.disableshaketoundo" version="0.1.0" />
+	<icon src="img/152x152.png" gap:role="default" />
+	<icon src="img/57x57.png" gap:platform="ios" width="57" height="57" />
+	<icon src="img/72x72.png" gap:platform="ios" width="72" height="72" />
+	<icon src="img/76x76.png" gap:platform="ios" width="76" height="76" />
+	<icon src="img/114x114.png" gap:platform="ios" width="114" height="114" />
+	<icon src="img/120x120.png" gap:platform="ios" width="120" height="120" />
+	<!-- retina iPad support: PhoneGap 2.5.0+ only -->
+	<icon src="img/144x144.png" gap:platform="ios" width="144" height="144" />
+	<icon src="img/152x152.png" gap:platform="ios" width="152" height="152" />
+	<icon src="img/180x180.png" gap:platform="ios" width="180" height="180" />
+	<gap:splash src="splash.png" />
+	<gap:splash src="img/240x320.png" gap:platform="android" gap:density="ldpi" />
+	<gap:splash src="img/320x480.png" gap:platform="android" gap:density="mdpi" />
+	<gap:splash src="img/480x800.png" gap:platform="android" gap:density="hdpi" />
+	<gap:splash src="img/640x1136.png" gap:platform="android" gap:density="xhdpi" />
+	
+	<gap:splash src="img/320x480.png" gap:platform="ios" width="320" height="480" />
+	<gap:splash src="img/640x960.png" gap:platform="ios" width="640" height="960" />
+	<gap:splash src="img/640x1136.png" gap:platform="ios" width="640" height="1136" />
+	<gap:splash src="img/667h@2x.png" gap:platform="ios" width="750" height="1334" />
+	<gap:splash src="img/portrait736h@3x.png" gap:platform="ios" width="1242" height="2208" />
+	<gap:plugin name="nl.kw.cordova.androidviewport" version="0.0.5" />
+	<preference name="SplashScreenDelay" value="10000" />
+	<preference name="splash-screen-duration" value="10000"/>
+	<preference name="AutoHideSplashScreen" value="true" />
+	<preference name="orientation" value="portrait" />
+	<preference name="webviewbounce" value="false" />	
+	<preference name="android-minSdkVersion" value="19" />
+	<preference name="show-splash-screen-spinner" value="false" />
+	<preference name="UIWebViewBounce" value="false"/>
+  	<preference name="DisallowOverscroll" value="true"/>
+  	<gap:plugin name="nl.x-services.plugins.launchmyapp">
+	  <param name="URL_SCHEME" value="roomiezen" />
+	</gap:plugin>
+</widget>
