@@ -74,15 +74,26 @@
 	margin-right: 20px;
 
 }
+/*your chore*/
+.chore-box {
+	border: 1px black solid;
+	
+}
+.chore-box h4 {
+	width: 100%;
+	border-bottom: 1px black solid;
+}
+.chore-box p {
+padding: 5px;
+}
 /*header*/
 
-.nav-bar-block .bar.bar-stable .title, .menu-left .bar.bar-header {
+/*.nav-bar-block .bar.bar-stable .title, .menu-left .bar.bar-header {
 	color: white;
-	background-color: #2A2A2A;
 	font-size: 2em;
 	padding-top: 7px;
-
-}
+}*/
+/*
 .nav-bar-block .bar.bar-stable{
 	background-color: #2A2A2A;
 }
@@ -91,4 +102,4 @@
 }
 .nav-bar-block .bar-stable .button.button-clear {
 	color: white;
-}
+}*/
