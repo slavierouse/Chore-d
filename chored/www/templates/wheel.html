@@ -1,9 +1,20 @@
 <ion-view view-title="Chore'd">
 	<ion-content>
-		<div class="wheel">
-		  <ul class="umbrella">
-		    <li class="color" ng-repeat="chore in chores track by chore.id"></li>
-		  </ul>
+		<div class="row">
+			<div class="wheel">
+			  <ul class="umbrella">
+			    <li class="color" ng-repeat="chore in chores track by chore.id"></li>
+			  </ul>
+			  <div class="wheel-spinner"><div class="spin-center"></div></div>
+			</div>
+		</div>
+		<div class="row">
+			<ul class="col col-50">
+				<li ng-repeat="chore in chores.slice(0,Math.floor(chores.length/2)) track by chore.id">{{chore.name}}</li>
+			</ul>
+			<ul class="col col-50">
+				<li ng-repeat="chore in chores.slice(Math.floor(chores.length/2)) track by chore.id">{{chore.name}}</li>
+			</ul>
 		</div>
 	</ion-content>
 </ion-view>
