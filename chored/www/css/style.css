@@ -7,7 +7,7 @@
   white-space: nowrap;
   height: 700px;
 }
- 
+
 /* The ghost, nudged to maintain perfect centering */
 .centering-block:before {
   content: '';
@@ -17,7 +17,7 @@
   margin-right: -0.25em; /* Adjusts for spacing */
 }
 
-/* The element to be centered, can also be of any width and height */ 
+/* The element to be centered, can also be of any width and height */
 .centered {
   display: inline-block;
   vertical-align: middle;
@@ -35,11 +35,7 @@
 	background-color: #E2E2E2;
 }
 
-/*sign in page*/
-.sign-in input[type='email'], .sign-in input[type='password']{
-	margin: 10px;
-	padding-left: 5px;
-}
+
 /*leaderboard*/
 .leaderboard .item{
 	background-color: #E2E2E2;
@@ -53,14 +49,14 @@
 	text-align: left;
 	margin-top: 20px;
 	width: 150px;
-	
+
 }
 .points{
 	text-align: right;
 	margin-top: 10px;
 	margin-left: 40px;
 	font-size: 3em;
-	
+
 }
 .points .label {
 	font-size: .5em;
