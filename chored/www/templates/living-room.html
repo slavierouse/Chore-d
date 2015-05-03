@@ -10,7 +10,7 @@
 						<h5>{{chore.name}}</h5>
 						<!-- time completed -->
 						<p>{{chore.assignee}}</p>
-						<div class="user-completed" ng-if="chore.assignee!=user.email&&chore.timeCompleted!=null" ng-click="verifyPopup()">
+						<div class="user-completed" ng-if="chore.assignee!=user.email&&chore.timeCompleted!=null" ng-click="verifyPopup(chore)">
 							<span class="icon ion-ios-search"></span>
 							<span class="icon ion-plus"></span>
 						</div>
