@@ -2,50 +2,62 @@
 <ion-content>
 <ion-slide-box active-slide="room" show-pager="false">
 <ion-slide class="padding">
-<h2>{{user.apartment}}</h2>
-<h4>Chores for {{today}} to {{oneWeekLater}}</h4>
-<span class="icon ion-ios-chatbubble" ng-click="goToChat()"></span>
+<header>
+	<div class="row">
+		<h2 class="col col-80">{{user.apartment||'Apartment'}}</h2>
+		<span class="icon ion-chatbubbles col col-20" ng-click="goToChat()"></span>
+	</div>
+	<h4>Chores for {{today}} to {{oneWeekLater}}</h4>
+</header>
 <ul>
-	<li ng-repeat="chore in chores | filter:{assignee:'!null'} track by chore.id">
-		<h5>{{chore.name}}</h5>
+	<li ng-repeat="chore in chores | filter:{assignee:'!null'} track by chore.id" class="box c50" ng-class="{'mt10':$index>1}">
+		<div class="box-header">
+			<h5>{{chore.name}}</h5>
+		</div>
 		<!-- time completed -->
-		<p>{{chore.assignee}}</p>
+
+		<img src="img/profile-{{$index+1}}.jpg" class="box-img">
+		<!-- <p>{{chore.assignee}}</p> -->
 		<div class="user-completed" ng-if="chore.assignee!=user.email&&chore.timeCompleted!=null" ng-click="verifyPopup(chore)">
 			<span class="icon ion-ios-search"></span>
 			<span class="icon ion-plus"></span>
+			<p>DONE!</p>
 		</div>
 						<!-- <a class="button" ng-click="verifyCompletion(chore)" ng-if="chore.assignee!=user.email&&chore.timeCompleted!=null">Validate Completion</a>
 						<a class="button" ng-click="didntComplete(chore)" ng-if="chore.assignee!=user.email&&chore.timeCompleted!=null">S/he lied!</a> -->
-						<p ng-if="chore.assignee==user.email&&chore.timeCompleted!=null">Awaiting roommate verification</p>
+						<p ng-if="chore.assignee==user.email&&chore.timeCompleted!=null" class="await">Awaiting roommate verification</p>
 					</li>
 				</ul>
 			</ion-slide>
 			<ion-slide class="padding" ng-controller="MessagesCtrl">
-			<ion-content>
-			<span class="icon ion-ios-arrow-back" ng-click="goToChoreAssignments()"></span>
+			<header>
+				<div class="row">
+					<h2 class="col col-80">{{user.apartment||'Apartment'}}
+					<br/>Chat
+					</h2>
+					<span class="icon ion-android-apps col col-20" ng-click="goToChoreAssignments()"></span>
+				</div>
+				</header>
 			<ul>
 				<li ng-repeat="message in messages">
 					<div class="item item-thumbnail-left">
 						<img src="{{'img/profile-'+message.senderId+'.png'}}">
-						<p class="username">{{message.name}}</p>
 						<div class='messageContent'>
 							<p class='message'>{{message.content}}</p>
-							<p class='date'>{{message.timeSent}}</p>
+							<p class='date'>{{message.name}} {{message.timeSent}}</p>
 						</div>
 					</div>
 
 				</li>
 			</ul>
-			<ul>
-				<li ng-repeat=''>
-				</li>
-			</ul>
+			<form class="bar bar-footer bar-stable row" ng-submit="sendMessage()">
+				<input type="text" name="message" class="col col-75" ng-model="message">
+				<input type="submit" class='chatSend' value="Send" class="col col-25">
+			</form>
 		</ion-content>
-		<form class="bar bar-footer bar-stable row" ng-submit="sendMessage()">
-			<input type="text" name="message" class="col col-75" ng-model="message">
-			<input type="submit" value="Send" class="col col-25">
-		</form>
+
 	</ion-slide>
 </ion-slide-box>
 </ion-content>
 </ion-view>
+

@@ -1,5 +1,7 @@
 .living-room .item {
   background-color: rgba(0,0,0,0);
+  border-left: 0px;
+  border-right: 0px;
 }
 
 
@@ -15,4 +17,14 @@
       position: absolute;
       bottom: 8px;
     }
+}
+
+.chatSend {
+  background-color: black;
+  color: white;
+  width: 33%;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  margin-top: -5px;
 }

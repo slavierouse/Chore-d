@@ -7,11 +7,58 @@ body,h1,h2,h3,h4,h5,h6{
 .mt5, .row.mt5{
   margin-top: 5px;
 }
+.mt10, .row.mt10{
+  margin-top: 10px;
+}
 .mt20,h3.mt20{
   margin-top: 20px;
 }
 .color-dot{
   border-radius: 50%;
+}
+.title.title-center.header-item{
+  background-image: url(../img/main-logo-big.png);
+  background-size: cover;
+  background-position: center;
+  text-indent: 9999px;
+  min-width: 200px;
+}
+.await,.user-completed{
+    position: absolute;
+  top: 60px;
+  /* width: 100%; */
+  white-space: normal;
+  /* height: 67px; */
+  /* display: none; */
+  line-height: 1.1;
+  color: white;
+  background: rgba(0,0,0,.7);
+  padding: 5px;
+  margin-right: 8px;
+  text-align: center;
+}
+.user-completed{
+    left: 0px;
+  top: 26px;
+  height: calc(100% - 26px);
+  width: 100%;
+  font-weight: bold;
+  padding-top:20px;
+  >.icon{
+    font-size: 20px;
+    vertical-align: top;
+    &.ion-ios-search{
+      font-size: 40px;
+    }
+    &.ion-plus:before{
+        vertical-align: top;
+        margin-top: 7px;
+        margin-left: -29px;
+    }
+  }
+  >p{
+    font-size: 20px;
+  }
 }
 .scroll-content{
    background: -webkit-linear-gradient(#3fffa6, #b0dcff); /* For Safari 5.1 to 6.0 */
@@ -144,18 +191,71 @@ $colors: (#E6E73B, #39B54A, #D09D00, #00C9FF, #178DFF, #FF3800);
     font-size: 20px;
   }
 }
-.wheel-view{
+.c50{
+  float: left;
+  width: 45%;
+  &:nth-child(even){
+    margin-left: 2.5%;
+    margin-right: 5%;
+  }
   
-  .box{
+}
+
+.box{
     background-color: #FFFF5C;
     padding: 16px;
+    position: relative;
+  }
+  .box-img{
+    width:calc(100% + 16px);
+    margin-left: -8px;
   }
   .box-header{
     background-color: #FFED8D;
     margin: -16px -16px 0 -16px;
     padding: 8px 16px;
   }
+  .living-room header{
+    h2,h4{
+      text-align: center;
+      color: #FFF;
+      margin: 0;
+      padding: 0;
+    }
+    h4{
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    h2{
+      font-size: 18px;
+      line-height: 1.5;
+      +span{
+        text-align: right;
+        font-size: 24px;
+        color: #FFF;
+        margin-top: -12px;
+        padding: 0;
+      }
+    }
+  }
+  .living-room .box{
+    padding:8px 8px 0 8px;
+    line-height: 0;
+  }
+  .living-room .box-header{
+    padding: 4px 8px;
+    margin: -8px -8px 0 -8px;
+    h5{
+      margin: 0;
+      font-size: 16px;
+    }
+  }
+.color.assigned:after{
+  background-color:rgba(0,0,0,.6)
 }
-.assigned{
+.color-dot.assigned{
+  color: #FFF;
+  font-size: 18px;
+  text-align: center;
+}
 
-}
