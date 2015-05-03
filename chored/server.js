@@ -1,5 +1,6 @@
 var app = require('./app');
 var chores = require('./initiation/chores');
+var messageLog = [];
 
 function clone(obj) {
     if(obj === null || typeof(obj) !== 'object')
@@ -17,6 +18,10 @@ function clone(obj) {
 
 app.get('/chores',function(request,response) {
   response.send(JSON.stringify(chores));
+});
+
+app.get('/messages',function(request,response) {
+  response.send(JSON.stringify(messageLog));
 });
 
 
@@ -117,7 +122,18 @@ io.on('connection', function(socket){
     console.log(chores);
     console.log(choreLog);
 
-  })
+  });
+
+  socket.on('message',function(messageContent){
+    //var thisMessage = clone(messageContent);
+    var thisMessage = {};
+    thisMessage.senderName=socket.userName;
+    thisMessage.content = messageContent.content;
+    thisMessage.timeSent = new Date();
+    var thatMessage = clone(thisMessage);
+    messageLog.push(thatMessage);
+    io.sockets.emit('newMessage',thisMessage);
+  });
 
 });
 

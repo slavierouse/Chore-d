@@ -26,12 +26,22 @@
   socket.emit('confirmChoreComplete',{
     chore: {id: 1},
     done: false
-  })
+  });
 
   //How to accept a confirmation request
   socket.emit('confirmChoreComplete',{
     chore: {id: 1},
     done: true
+  });
+
+
+  $.get('/messages', function(messageLog){
+    console.log(messageLog);
+  })
+  socket.emit('message',{content: 'blah'});
+
+  socket.on('newMessage',function(data){
+    console.log(data);
   })
 
 
@@ -41,9 +51,7 @@
       address = JSON.parse(reply).address.Address;
       console.log(address);
     })
-  }
-
-  );
+  });
 
 </script>
 </head>
