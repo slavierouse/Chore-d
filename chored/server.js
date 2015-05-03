@@ -124,6 +124,11 @@ io.on('connection', function(socket){
       httpUri += socket.userName+" will do the " + chores[chore.id].name + " roomiezen:\\open";
       httpUri += " this week."
       http.get(httpUri);
+      var httpUri = 'http://rest.nexmo.com/sms/json?api_key=0fa380ab&api_secret=1d06fbc9&from=12532715644&to=1';
+      httpUri += 5857469676 +'&text=';
+      httpUri += socket.userName+" will do the " + chores[chore.id].name + " roomiezen:\\open";
+      httpUri += " this week."
+      http.get(httpUri);
     })
   });
 

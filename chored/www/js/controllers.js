@@ -258,7 +258,7 @@ navigator.geolocation.getCurrentPosition(function(position){
     }
     if(valid){
       User.email = $scope.login.email;
-      User.phoneNumber = $scope.login.phoneNumber;
+      User.phoneNumber = $scope.login.number;
       socket.emit("signin",{email:$scope.login.email,name:$scope.login.name,phone:$scope.login.number});
       $state.go("selectChores");
     }
