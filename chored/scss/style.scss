@@ -47,13 +47,22 @@ $colors: (#9ED110, #50B517, #179067, #476EAF, #9f49ac, #CC42A2, #FF3BA7, #FF5800
     position: relative;
   text-align: center;
   z-index: 100;
-  top: 97px;
+  top: 52px;
   text-align: center;
-
+  p{
+    position: absolute;
+    top: calc(50% - 16px);
+    color: #FFF;
+    width: 100%;
+    z-index: 50;
+  }
 }
 .spin-center{
-  width: 15px;
-  height: 15px;
+  -webkit-transition: all 5000ms cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition:         all 5000ms cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-transform: rotateZ(45deg);
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   background-color: #000;
   display: inline-block;
@@ -61,8 +70,8 @@ $colors: (#9ED110, #50B517, #179067, #476EAF, #9f49ac, #CC42A2, #FF3BA7, #FF5800
   &:after{
     content:"";
     position:absolute;
-    left: 2.5px;
-    top:-40px;
+      left: 45px;
+    top: -45px;
     border: 5px solid transparent;
     border-bottom: 40px solid black;
   }
