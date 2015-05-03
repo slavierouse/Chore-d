@@ -249,7 +249,7 @@ navigator.geolocation.getCurrentPosition(function(position){
     });
 
   $scope.signIn = function(){
-    
+
     var valid = true;
     for(var i in $scope.login){
       if(!$scope.login[i]){
@@ -354,7 +354,7 @@ navigator.geolocation.getCurrentPosition(function(position){
   { title: 'Will', id: 1, points: 50 },
   { title: 'Oscar', id: 2, points: 17 },
   { title: 'Shaheen', id: 3, points: 75 },
-  { title: 'Torey', id: 4, points: 43 },
-  { title: 'Cowbell', id: 5, points: 89 },
+  { title: 'Katie', id: 4, points: 43 },
+  { title: 'Haytham', id: 5, points: 89 },
   { title: 'MacKenzie', id: 6, points: 0 }];
 });
