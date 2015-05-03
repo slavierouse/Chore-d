@@ -7693,6 +7693,12 @@ body, h1, h2, h3, h4, h5, h6 {
 .color-dot {
   border-radius: 50%; }
 
+.img-responsive {
+  max-width: 100%; }
+
+.logo {
+  margin-top: 40px; }
+
 .title.title-center.header-item {
   background-image: url(../img/main-logo-big.png);
   background-size: cover;
@@ -7902,6 +7908,18 @@ ion-side-menu .scroll-content {
     margin-left: 2.5%;
     margin-right: 5%; }
 
+.no-padding {
+  padding: 0; }
+
+.no-ptb {
+  padding-top: 0;
+  padding-bottom: 0; }
+
+.chat-bubble {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: white; }
+
 .points {
   position: absolute;
   /* bottom: 20px; */
@@ -7973,6 +7991,30 @@ ion-side-menu .scroll-content {
   color: #FFF;
   font-size: 18px;
   text-align: center; }
+
+.living-room .item {
+  background-color: transparent;
+  border-left: 0px;
+  border-right: 0px; }
+
+.messageContent {
+  background-color: white;
+  height: 100%; }
+  .messageContent p.message {
+    position: absolute;
+    top: 8px; }
+  .messageContent p.date {
+    position: absolute;
+    bottom: 8px; }
+
+.chatSend {
+  background-color: black;
+  color: white;
+  width: 33%;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  margin-top: -5px; }
 
 /*sign in page*/
 .select-chores, .sign-in {

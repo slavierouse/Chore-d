@@ -40,12 +40,13 @@
 				</header>
 			<ul>
 				<li ng-repeat="message in messages">
-					<div class="item item-thumbnail-left">
-						<img src="{{'img/profile-'+message.senderId+'.png'}}">
-						<div class='messageContent'>
+					<div class="row">
+						<img src="{{'img/profile-'+(($index%6)+1)+'.jpg'}}" class="col col-20 col-bottom no-ptb" ng-if="$odd">
+						<div class='chat-bubble col col-80'>
 							<p class='message'>{{message.content}}</p>
 							<p class='date'>{{message.name}} {{message.timeSent}}</p>
 						</div>
+						<img ng-if="$even" src="{{'img/profile-'+(($index%6)+1)+'.jpg'}}" class="col col-20 col-bottom no-ptb">
 					</div>
 
 				</li>

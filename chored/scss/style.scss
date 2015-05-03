@@ -16,6 +16,12 @@ body,h1,h2,h3,h4,h5,h6{
 .color-dot{
   border-radius: 50%;
 }
+.img-responsive{
+  max-width: 100%;
+}
+.logo{
+  margin-top: 40px;
+}
 .title.title-center.header-item{
   background-image: url(../img/main-logo-big.png);
   background-size: cover;
@@ -230,6 +236,18 @@ $colors: (#E6E73B, #39B54A, #D09D00, #00C9FF, #178DFF, #FF3800);
     margin-right: 5%;
   }
   
+}
+.no-padding{
+  padding: 0;
+}
+.no-ptb{
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.chat-bubble{
+  padding: 10px;
+  border-radius: 5px;
+  background-color:white;
 }
 .points{
   position: absolute;
