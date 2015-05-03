@@ -19,7 +19,7 @@ for(var i = 0; i<choreList.length; i++){
     status: 'unassigned',
     timeAssigned: null,
     timeCompleted: null,
-    selected: true,
+    selected: false,
     assignee: null,
     picture: null
   };
