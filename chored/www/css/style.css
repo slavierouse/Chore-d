@@ -1,1 +1,77 @@
 /* Empty. Add your own CSS if you like */
+/* This parent can be any width and height */
+.centering-block {
+  text-align: center;
+
+  /* May want to do this if there is risk the container may be narrower than the element inside */
+  white-space: nowrap;
+  height: 700px;
+}
+ 
+/* The ghost, nudged to maintain perfect centering */
+.centering-block:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -0.25em; /* Adjusts for spacing */
+}
+
+/* The element to be centered, can also be of any width and height */ 
+.centered {
+  display: inline-block;
+  vertical-align: middle;
+  width: 300px;
+
+}
+.sign-up-btn{
+	background-color: gray;
+	border-radius: 8%;
+	color: white;
+	border: none;
+	text-transform: uppercase;
+}
+.app-bkgd{
+	background-color: #E2E2E2;
+}
+
+/*sign in page*/
+.sign-in input[type='email'], .sign-in input[type='password']{
+	margin: 10px;
+	padding-left: 5px;
+}
+/*leaderboard*/
+.leaderboard .item{
+	background-color: #E2E2E2;
+	border: none;
+	padding: none;
+	width: 100%;
+}
+
+.leader {
+	margin-right: 60px;
+	text-align: left;
+	margin-top: 20px;
+	width: 150px;
+	
+}
+.points{
+	text-align: right;
+	margin-top: 10px;
+	margin-left: 40px;
+	font-size: 3em;
+	
+}
+.points .label {
+	font-size: .5em;
+	float: left;
+}
+.thumbnail{
+	width: 100px;
+	height: 60px;
+	border: 1px black solid;
+	border-radius: 100%;
+	margin-right: 20px;
+
+}
+

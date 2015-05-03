@@ -24,17 +24,25 @@ angular.module('chored', ['ionic', 'starter.controllers'])
   $stateProvider
    .state('signIn', {
     url: "/sign-in",
-    abstract: true,
     templateUrl: "templates/sign-in.html",
-    controller: 'AppCtrl'
+    controller: 'signInCtrl'
   })
+ 
   .state('home', {
     url: "/home",
     abstract: true,
     templateUrl: "templates/menu.html",
     /*controller: 'AppCtrl'*/
   })
-
+  .state('home.leaderboard', {
+    url: "/leaderboard",
+    views:{
+      'menuContent': {
+          templateUrl: "templates/leaderboard.html"
+      }  
+    }
+    
+  })
   .state('home.livingRoom', {
     url: "/living-room",
     views: {

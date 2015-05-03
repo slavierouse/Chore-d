@@ -1,0 +1,16 @@
+<ion-view  ng-controller="signInCtrl" hide-nav-bar="true" cache-view="false" view-title="">
+<form class="app-bkgd sign-in" method="post" action="javascript:void(0)" id="register" ng-submit="signIn()" class="padding">
+	<div class="centering-block padding">
+		<div class="centered">
+			<img src="images/logo-alternate.png" class="logo">
+			<input type="email" name="email" placeholder="Your email" ng-model="login.email" required>
+			<input type="password" name="password" placeholder="Password" ng-model="login.email" required>
+			<span class="error" ng-show="err">{{err}}</span>
+			<input type="submit" value="Next" class="sign-up-btn">
+			<div class="sign-up-links">
+				<!-- <a href="#">Sign up!</a><span>|</span> --><a ui-sref="forgot-pw" class="u orange-txt">Forgot your password?</a>
+			</div>
+		</div>
+	</div>
+</form>
+</ion-view>
